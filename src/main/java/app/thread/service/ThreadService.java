@@ -1,0 +1,52 @@
+package app.thread.service;
+
+
+import app.Exceptions.thread_exceptions.ForumThreadNotFoundException;
+import app.GCV;
+import app.thread.model.Thread;
+import app.thread.repository.ThreadRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+
+@Slf4j
+@Service
+public class ThreadService {
+
+    private final ThreadRepository theThreadRepository;
+
+    public ThreadService(
+            ThreadRepository _thread_repo
+    )
+    {
+        theThreadRepository = _thread_repo;
+    }
+
+
+
+
+
+
+
+    public void changeThreadLockStatus(int _target_thread_id)
+        throws ForumThreadNotFoundException {
+
+        Thread thread = theThreadRepository.findById(_target_thread_id).orElseThrow(() -> new ForumThreadNotFoundException(
+                ("Thread with ID[%d] not found." + (GCV.isDebugging() ? "@changeThreadLockStatus" : "")).formatted(_target_thread_id)
+        ));
+
+        log.info("Thread with ID[%d] LOCK status changed to " + !thread.isLocked());
+        thread.setLocked(!thread.isLocked());
+    }
+
+    public void changeThreadPinStatus(int _target_thread_id)
+    throws ForumThreadNotFoundException {
+
+        Thread thread = theThreadRepository.findById(_target_thread_id).orElseThrow(() -> new ForumThreadNotFoundException(
+                ("Thread with ID[%d] not found." + (GCV.isDebugging() ? "@changeThreadPinStatus" : "")).formatted(_target_thread_id)
+        ));
+
+        log.info("Thread with ID[%d] PIN status changed to " + !thread.isPinned());
+        thread.setPinned(!thread.isPinned());
+    }
+}
