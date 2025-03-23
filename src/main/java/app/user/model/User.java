@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.UUID;
 
 
-@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,8 +20,7 @@ import java.util.UUID;
 @Table(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @Id  @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_uuid", nullable = false, unique = true)
     private UUID id;
 
@@ -66,7 +64,7 @@ public class User {
 
 
     @OneToMany(mappedBy = "originalPoster", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    List<Thread> threadList;
+    private List<Thread> threadList;
 
 
     public String debugString(){

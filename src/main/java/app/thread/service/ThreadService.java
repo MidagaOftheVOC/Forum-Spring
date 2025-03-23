@@ -1,7 +1,7 @@
 package app.thread.service;
 
 
-import app.Exceptions.thread_exceptions.ForumThreadNotFoundException;
+import app.thread.ForumThreadNotFoundException;
 import app.GCV;
 import app.thread.model.Thread;
 import app.thread.repository.ThreadRepository;

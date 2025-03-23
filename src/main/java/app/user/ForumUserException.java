@@ -1,4 +1,4 @@
-package app.Exceptions.user_exceptions;
+package app.user;
 
 public class ForumUserException extends Exception {
 

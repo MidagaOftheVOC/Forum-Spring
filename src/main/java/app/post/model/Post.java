@@ -1,9 +1,9 @@
 package app.post.model;
 
 
+import app.thread.model.Thread;
 import app.user.model.User;
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 

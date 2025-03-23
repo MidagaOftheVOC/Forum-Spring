@@ -1,6 +1,6 @@
-package app.Exceptions.thread_exceptions;
+package app.thread;
 
-import app.Exceptions.user_exceptions.ForumUserException;
+import app.user.ForumUserException;
 
 public class ForumThreadNotFoundException extends ForumUserException {
 

@@ -1,4 +1,4 @@
-package app.Exceptions.thread_exceptions;
+package app.thread;
 
 public class ForumThreadException extends Exception{
 
