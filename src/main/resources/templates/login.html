@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>THE ФОРУМЪТ</title>
+
+</head>
+
+<!--    HEAD / HEADER   -->
+
+<header>
+</header>
+
+<!--    HEADER / BODY   -->
+
+
+
+<body>
+
+<form th:action="@{/login}" th:method="POST" th:object = "${loginRequest}">
+
+    <input type="text" name="username" placeholder="Username" th:field = "*{username}"/>
+    <br>
+    <input type="password" name="password" placeholder="Password"  th:field = "*{password}"/>
+    <br>
+    <button type="submit">Login</button>
+
+    <p th:if="${errorMsg}" th:text="${errorMsg}"></p>
+
+</form>
+
+</form>
+
+</body>
+</html>

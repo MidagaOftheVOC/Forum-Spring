@@ -16,6 +16,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder    // object creation looks nicer
 @Entity
 @Table(name = "users")
 public class User {
@@ -66,6 +67,9 @@ public class User {
     @OneToMany(mappedBy = "originalPoster", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Thread> threadList;
 
+    public boolean hasAltUsername(){
+        return shownUsername != null && shownUsername != "";
+    }
 
     public String debugString(){
         return "User object -> { id = [%s], username = [%s], shown_username = [%s], userhash = [%s] }"
