@@ -1,24 +1,24 @@
 package app.web;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
-@RestController("")
-@RequestMapping("")
+@Controller
 public class ThreadsController {
 
-    @PostMapping("/main")
-    void helloWorld(@RequestBody String body){
-        log.info("HELLO WORLD! Here's the HTML body: ");
+    @GetMapping("/main")
+    public ModelAndView getFrontPageThreads(){
+        ModelAndView mav = new ModelAndView();
 
-        if(body != null)
-            log.info(body);
-        else
-            log.debug("POST body is empty @/main");
+
+
+
+        return mav;
     }
+
+
 
 }

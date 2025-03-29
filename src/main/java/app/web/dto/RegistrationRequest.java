@@ -15,6 +15,12 @@ public class RegistrationRequest {
     @Size(min = 8, max = 30, message = "Password between 8 and 30 chars")
     private String rawPassword;
 
+    /**
+     * IMPORTANT RULE:
+     * While the form CAN take 0 length strings from the web,
+     * empty strings MUST be turned to null before drawing up
+     * an entry in DB.
+     */
     @Size(min = 0, max = 30, message = "Shown username up to 30 characters")
     private String shownUsername;
 
@@ -23,6 +29,6 @@ public class RegistrationRequest {
     private String email;
 
     public boolean hasAltUsername(){
-        return shownUsername != null && shownUsername != "";
+        return shownUsername != null;
     }
 }

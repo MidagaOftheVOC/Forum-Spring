@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>not used</title>
+
+    <!--
+    <link rel="stylesheet" href="/static/css/header_fragment.css" />
+    -->
+</head>
+<body>
+
+<div th:fragment = "header" class = "header-fragment-div">
+
+    <div class = "header-main-wrapper-div">
+        <div class = "header-logo-div">
+            <img  width = 100px height = 50px class="header-logo-image"  src="https://media.istockphoto.com/id/2065674519/photo/rolling-says-macro.jpg?s=1024x1024&w=is&k=20&c=ZRzdKZTGsNQqzQ4HpvVsrWT1BL9NjKmB76pIteut-xs=">
+        </div>
+
+        <div class = "header-stats-div">
+            Общ брой регистрирани: <span th:text = "${totalUsers}"></span>
+            Общ брой нишки: <span th:text = "${totalThreads}"></span>
+        </div>
+
+        <div class = "account-information-div">
+            <!--    USER LOGGED IN    -->
+            <div class = "account-information-logged-in-div" th:if = "${user != null}">
+                <div class = "account-information-user-div">
+                    Влязъл като <span th:text = "${user.username}"></span>
+                    Вид потребител: <span th:text="${user.userStatus == 'BANNED' ? 'BANNED' : (user.userType == 'ADMIN' ? 'ADMIN' : 'STANDARD')}"></span>
+                    <div th:if="${user.shownUsername != null}">
+                        Излизащ като <span th:text = "${user.shownUsername}"></span>
+                    </div>
+                    <div th:if="${user != null}" class = "account-information-user-logout-button-div">
+                        <a th:href = "@{/logout}">ИЗЛЕЗ</a>
+                    </div>
+                </div>
+                <!-- 	<img> за аватара	-->
+            </div>
+
+            <!--    USER not LOGGED IN    -->
+            <div class = "account-information-not-logged-div"   th:if = "${user == null}">
+                <div class = "account-information-not-logged-text-div">
+                    Влязъл сте като ГОСТ.
+                    Нямате право да пишете постове или започвате нишки.
+                </div>
+
+                <div class = "account-information-login-button-div">
+                    <a th:href = "@{/login}">ВЛЕЗ</a>
+                </div>
+
+                <div class = "account-information-register-button-div">
+                    <a th:href = "@{/register}">РЕГИСТРИРАЙ СЕ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class = "header-bottom-button-bar-div">
+
+        <div class = "header-bottom-bar-threads-button">
+            Нишки
+        </div>
+
+        <div class = "header-bottom-bar-create-thread-button">
+            Създай нишка
+        </div>
+
+        <div class = "header-bottom-bar-search-by-category-button">
+            Търси по категория
+        </div>
+
+        <!-- 	някакъв по-специален цвят или нещо такова за адинския бутон	-->
+        <div th:if="${user != null}">
+            <div th:if="${user.userType == 'ADMIN'}"  class = "header-bottom-bar-user-control-button_ADMIN_ONLY">
+                Потребителски контрол
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+</body>
+</html>

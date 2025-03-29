@@ -1,28 +1,63 @@
 package app.web;
 
 
+import app.GCV;
+import app.security.AuthenticationUserData;
+import app.thread.service.ThreadService;
+import app.user.ForumUserNotFound;
 import app.user.model.User;
+import app.user.model.UserStatus;
+import app.user.model.UserType;
 import app.user.repository.UserRepository;
 import app.user.service.UserService;
 import app.web.dto.LoginRequest;
 import app.web.dto.RegistrationRequest;
 import ch.qos.logback.core.model.Model;
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import static com.mysql.cj.conf.PropertyKey.logger;
+
 @Controller
 public class WebpageController {
 
     private final UserService theUserService;
+    private final ThreadService theThreadService;
+
 
     public WebpageController(
-            UserService _userService
+            UserService _userService,
+            ThreadService _threadService
     ){
         theUserService = _userService;
+        theThreadService = _threadService;
     }
+
+    @GetMapping("/")
+    public String emptyPageRedirectoToMain(){
+        return "redirect:/main";
+    }
+
+    @GetMapping("/main")
+    public ModelAndView showMainPage(@AuthenticationPrincipal AuthenticationUserData auth){
+        ModelAndView mav = new ModelAndView();
+
+        //  COMMON HEADER DATA
+        mav.addObject("totalUsers", theUserService.getUserCount());
+        mav.addObject("totalThreads", theThreadService.getThreadCount());
+
+        if(auth != null){   // LOGGED USER-SPECIFIC DATA
+            mav.addObject("user", theUserService.getUserById(auth.getUserUuid()));
+        }
+
+        return mav;
+    }
+
 
     @GetMapping("/login")
     public ModelAndView showLoginPage(@RequestParam(value = "error", required = false) String errorParameter){

@@ -26,7 +26,10 @@ public class ThreadService {
 
 
 
-
+    // we're not expecting more than 4 billion threads
+    public int getThreadCount(){
+        return (int)theThreadRepository.count();
+    }
 
     public void changeThreadLockStatus(int _target_thread_id)
         throws ForumThreadNotFoundException {

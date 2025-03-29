@@ -22,7 +22,7 @@ public class Rating {
 //    @ManyToOne
 //    @JoinColumn(name = "user_uuid", insertable = false, updatable = false)
 //    private User user;
-//
+
 //    @ManyToOne
 //    @JoinColumn(name = "post_id", insertable = false, updatable = false)
 //    private Post post;

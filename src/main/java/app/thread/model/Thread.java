@@ -1,6 +1,7 @@
 package app.thread.model;
 
 
+import app.post.model.Post;
 import app.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @Data
@@ -25,6 +27,9 @@ public class Thread {
     @ManyToOne
     @JoinColumn(name = "original_poster_id", referencedColumnName = "user_uuid")
     private User originalPoster;
+
+    @OneToMany(mappedBy = "threadWherePosted", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Post> postList;
 
     @Column(name = "content_title", nullable = false)
     private String threadTitle;

@@ -1,6 +1,7 @@
 package app.user.model;
 
 
+import app.post.model.Post;
 import app.thread.model.Thread;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -64,8 +65,11 @@ public class User {
     private LocalDateTime lastActiveDate;
 
 
-    @OneToMany(mappedBy = "originalPoster", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "originalPoster", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Thread> threadList;
+
+    @OneToMany(mappedBy = "originalPoster", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Post> postList;
 
     public boolean hasAltUsername(){
         return shownUsername != null && shownUsername != "";

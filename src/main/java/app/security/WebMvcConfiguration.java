@@ -18,36 +18,24 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        if(true){
-            http
-                    .authorizeHttpRequests(matchers  -> matchers
-                            .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                            .requestMatchers("/main", "/login", "/success", "/register").permitAll()
-                            .anyRequest().authenticated()
-                    )
-                    .formLogin(form -> form
-                            .loginPage("/login")
-                            .defaultSuccessUrl("/success", true)
-                            .failureUrl("/login?error")
-                            .permitAll()
-                    )
-                    .logout(logout -> logout
-                            .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-                            .logoutSuccessUrl("/")
-                    );
+        http
+                .authorizeHttpRequests(matchers  -> matchers
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                        //.requestMatchers("/resources/static/**").permitAll()
+                        .requestMatchers("/main", "/login", "/success", "/register").permitAll()
+                        .anyRequest().permitAll()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/main", true)
+                        .failureUrl("/login?error")
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                        .logoutSuccessUrl("/")
+                );
 
-
-
-
-        }
-        else {
-            http
-                    .sessionManagement(session ->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                    .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/main").permitAll()
-                            .anyRequest().authenticated()
-                    );
-        }
 
         return http.build();
     }

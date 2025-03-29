@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
     or ideally change the function to *return false* by default.
 
     DODGE_EXCEPTION is a boolean, which if set, focuses on printing
-    informatoin using Slf4j or similar instead of throwing exception
+    information using @Slf4j or similar instead of throwing exception
     to ease debugging by reducing crashes. Workarounds may need to be
     made to make effective use of this.
  */
@@ -22,14 +22,12 @@ public class GCV {
     final static private boolean DODGE_EXCEPTION = true;
 
     /**
-    * DANGEROUS FUNCTION
-    *
+    * DANGEROUS FUNCTION!
     * Read GCV class description.
     * */
     static public boolean isDodgingExceptions() {return DODGE_EXCEPTION;}
     /**
-     * DANGEROUS FUNCTION
-     *
+     * DANGEROUS FUNCTION!
      * Read GCV class description.
      * */
     static public boolean isDebugging(){

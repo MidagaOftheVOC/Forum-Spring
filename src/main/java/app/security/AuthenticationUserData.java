@@ -18,12 +18,17 @@ import java.util.UUID;
 @AllArgsConstructor
 public class AuthenticationUserData implements UserDetails {
 
+    //  TODO:   figure out how to remove this ugliness
+    //  And don't change this class anymore(28.03.)
+    private static final long serialVersionUID = 574375817029383998L;
+
+
     private UUID userUuid;
     private String username;
     private String userhash;
+    private String shownUsername;
     private UserStatus userStatus;
     private UserType userType;  // or user role
-
 
 
     @Override
@@ -36,6 +41,8 @@ public class AuthenticationUserData implements UserDetails {
         return List.of(sga);
     }
 
+
+    //  Dodgy :)
     @Override
     public String getPassword() {
         return userhash;

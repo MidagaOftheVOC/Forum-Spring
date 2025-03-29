@@ -6,78 +6,16 @@
     <meta charset="UTF-8">
     <title>THE ФОРУМЪТ</title>
 
+    <link rel="stylesheet" type = "text/css" href="/css/main.css" />
+    <link rel="stylesheet" type = "text/css" href="/css/header_fragment.css" />
+
 </head>
 
 
 
 <header>
 
-    <div class = "header-main-wrapper-div">
-        <div class = "header-logo-div">
-            <img  width = 100px height = 50px class="header-logo-image"  src="https://media.istockphoto.com/id/2065674519/photo/rolling-says-macro.jpg?s=1024x1024&w=is&k=20&c=ZRzdKZTGsNQqzQ4HpvVsrWT1BL9NjKmB76pIteut-xs=">
-        </div>
-
-        <div class = "header-stats-div">
-            Общ брой регистрирани: <span th:text = "${totalUsers}"></span>
-            Общ брой нишки: <span th:text = "${totalThreads}"></span>
-        </div>
-
-        <div class = "account-information-div">
-
-            <div class = "account-information-logged-in-div" th:if = "${#authorization.expression('isAuthenticated()')}">
-
-
-                <div class = "account-information-user-div">
-                    Влязъл като *username*
-                    Излизащ като *shown_username*
-
-                    <div class = "account-information-user-logout-button-div">
-                        ИЗЛЕЗ
-                    </div>
-                </div>
-
-                <!-- 	<img> за аватара	-->
-
-            </div>
-
-            <div class = "account-information-not-logged-div">
-                <div class = "account-information-not-logged-text-div">
-                    Влязъл сте като ГОСТ.
-                    Нямате право да пишете постове или за започвате нишки.
-                </div>
-
-                <div class = "account-information-login-button-div">
-                    ВЛЕЗ
-                </div>
-
-                <div class = "account-information-register-button-div">
-                    РЕГИСТРИРАЙ СЕ
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class = "header-bottom-button-bar-div">
-
-        <div class = "header-bottom-bar-threads-button">
-            Нишки
-        </div>
-
-        <div class = "header-bottom-bar-create-thread-button">
-            Създай нишка
-        </div>
-
-        <div class = "header-bottom-bar-search-by-category-button">
-            Търси по категория
-        </div>
-
-        <!-- 	някакъв по-специален цвят или нещо такова за адинския бутон	-->
-        <div class = "header-bottom-bar-user-control-button_ADMIN_ONLY">
-            Потребителски контрол
-        </div>
-
-    </div>
+    <div th:insert = "~{fragments/header_fragment :: header}"></div>
 
 </header>
 
@@ -111,28 +49,7 @@
 <!-- overflow-y: auto; <- това е необходимо, за да излезе слайдер, когато нишките излязът от екрана(y+)-->
 <div class = "body-thread-container-div">
 
-    <div class = "thread">
-
-        <div class = "thread-title">
-            Заглавие на първата нишка
-        </div>
-        <div class = "thread-body">
-            Това е съдържание на първата нишка.
-        </div>
-        <div class = "thead-category-container">
-
-            <div class="thread-category-container">
-                <a th:each="category : ${thread.categories}"
-                   th:href="@{/category/{id}(id=${category.id})}"
-                   th:style="'background-color: ' + ${category.color} + ';'"
-                   class="category">
-                    <span th:text="${category.name}"></span>
-                </a>
-            </div>
-
-        </div>
-
-    </div>
+    body is here
 
 </div>
 
