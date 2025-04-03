@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    ПОТРЕБИТЕЛ
+</div>
+
+<div class = "user-main-info-div">
+
+    <div class = "user-name-avatar-div">
+        <!--    /resources/static/images/avatars/user123.png, this must be the argument    -->
+        <img th:src = "@{${avatarFileLocation}}">
+        <h4><span th:text = "${user.username}"></span></h4>
+    </div>
+
+
+
+
+</div>
+
+
+</body>
+</html>

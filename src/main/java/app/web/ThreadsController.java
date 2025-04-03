@@ -9,15 +9,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ThreadsController {
 
-    @GetMapping("/main")
-    public ModelAndView getFrontPageThreads(){
-        ModelAndView mav = new ModelAndView();
-
-
-
-
-        return mav;
-    }
+//    @GetMapping("/main")
+//    public ModelAndView getFrontPageThreads(){
+//        ModelAndView mav = new ModelAndView();
+//
+//
+//
+//
+//        return mav;
+//    }
 
 
 

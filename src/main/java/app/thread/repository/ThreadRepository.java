@@ -25,8 +25,8 @@ public interface ThreadRepository extends JpaRepository<Thread, Integer> {
 
     // TODO
     //  must select top @howMany rows ordered by views
-    @Query( "select t from threads order by t.views")
-    List<Thread> findXmostViewedThreads(int howMany);
+    //@Query( "select t from threads order by t.views")
+    //List<Thread> findXmostViewedThreads(int howMany);
 
 
 }
