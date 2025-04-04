@@ -156,7 +156,6 @@ public class UserService implements UserDetailsService {
         newUser.setLastActiveDate(LocalDateTime.now());
 
         newUser.setLastRedactDate(null);
-        newUser.setAvatarUrl(null);
         newUser.setQuote(null);
 
         // dates are created at entry creation in DB

@@ -35,9 +35,6 @@ public class User {
     @Column(name = "shown_username")
     private String shownUsername;
 
-    @Column(name = "avatar_url")
-    private String avatarUrl;
-
     @Column
     private String quote;
 
