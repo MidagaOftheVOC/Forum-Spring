@@ -58,6 +58,15 @@ public class WebpageController {
         return mav;
     }
 
+    @GetMapping("/avatar")
+    public ModelAndView showAvatarManagementPage(@AuthenticationPrincipal AuthenticationUserData auth) {
+        ModelAndView mav = new ModelAndView();
+
+        mav.addObject("user", theUserService.getUserById(auth.getUserUuid()));
+
+        return mav;
+    }
+
 
     @GetMapping("/login")
     public ModelAndView showLoginPage(@RequestParam(value = "error", required = false) String errorParameter){

@@ -7,8 +7,16 @@
 <body>
 <h1>Avatar Test Page</h1>
 
-<img id="profilePic" src="/images/default-avatar.png" width="150" height="150" alt="User Avatar">
+<img id="profilePic" width="250" height="250" alt="User Avatar">
 
-<button id="loadAvatar">Load Avatar</button>
+<hr>
+
+<h2>Upload New Avatar</h2>
+<form id = "uploadForm" method = "POST" th:action="@{/upload_avatar/{userId}(userId=${user.id})}" enctype="multipart/form-data" >
+    <input type="file" name="file" id="fileInput" accept=".png, .jpg, .jpeg, .gif" />   <!--  File select and upload to JS function  -->
+    <button type="submit">Upload Avatar</button>
+</form>
+
+<p id="uploadStatus"></p>
 </body>
 </html>

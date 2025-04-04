@@ -29,7 +29,14 @@ public class AvatarController {
     public ResponseEntity<Void> uploadAvatar(@PathVariable("userId") UUID userId,
                                              @RequestParam("file") MultipartFile file)
     {
-        return theAvatarServiceClient.uploadAvatar(userId, file);
+        System.out.println("Entered avatar-svc POST mapping in monolith");
+        ResponseEntity<Void> response = theAvatarServiceClient.uploadAvatar(userId, file);
+
+        if(!response.getStatusCode().is2xxSuccessful()){
+            throw new RuntimeException("AvatarController-@PostMapping :: %s".formatted(response.getStatusCode().toString()));
+        }
+
+        return response;
     }
 
     @DeleteMapping("/delete_avatar/{userId}")

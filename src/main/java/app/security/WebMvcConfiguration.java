@@ -24,6 +24,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                         .requestMatchers("/main", "/login", "/success", "/register", "/avatar",
                                 "/avatar_test").permitAll()
                         .requestMatchers("/user_view_profile").authenticated()
+                        .requestMatchers("/upload_avatar").permitAll()
+                        .requestMatchers("/upload_avatar/**").permitAll()
+
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
