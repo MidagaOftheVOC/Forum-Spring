@@ -1,5 +1,7 @@
 package app.avatar;
 
+import app.web.AvatarServiceClient;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +24,17 @@ public class AvatarController {
 
     @GetMapping("/avatar/{userId}")
     public ResponseEntity<String> getAvatar(@PathVariable UUID userId){
-        return theAvatarServiceClient.getAvatar(userId);
+
+        ResponseEntity<String> response = theAvatarServiceClient.getAvatar(userId);
+
+        System.out.println(response.getBody());
+
+        if(!response.getStatusCode().is2xxSuccessful()){
+            System.out.println("Entering @get in /avatar/{userId} ERROR CLAUSE");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+        return response;
     }
 
     @PostMapping("/upload_avatar/{userId}")

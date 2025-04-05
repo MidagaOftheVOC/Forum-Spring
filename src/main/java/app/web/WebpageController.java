@@ -1,41 +1,36 @@
 package app.web;
 
 
-import app.GCV;
+import app.avatar.AvatarService;
 import app.security.AuthenticationUserData;
 import app.thread.service.ThreadService;
-import app.user.ForumUserNotFound;
 import app.user.model.User;
-import app.user.model.UserStatus;
-import app.user.model.UserType;
-import app.user.repository.UserRepository;
 import app.user.service.UserService;
 import app.web.dto.LoginRequest;
 import app.web.dto.RegistrationRequest;
-import ch.qos.logback.core.model.Model;
 import jakarta.validation.Valid;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import static com.mysql.cj.conf.PropertyKey.logger;
-
 @Controller
 public class WebpageController {
 
     private final UserService theUserService;
     private final ThreadService theThreadService;
+    private final AvatarService theAvatarService;
 
 
     public WebpageController(
             UserService _userService,
-            ThreadService _threadService
+            ThreadService _threadService,
+            AvatarService _avatarService
     ){
         theUserService = _userService;
         theThreadService = _threadService;
+        theAvatarService = _avatarService;
     }
 
     @GetMapping("/")
@@ -52,7 +47,12 @@ public class WebpageController {
         mav.addObject("totalThreads", theThreadService.getThreadCount());
 
         if(auth != null){   // LOGGED USER-SPECIFIC DATA
-            mav.addObject("user", theUserService.getUserById(auth.getUserUuid()));
+            User user = theUserService.getUserById(auth.getUserUuid());
+            mav.addObject("user", user);
+
+            theAvatarService.test();
+
+            mav.addObject("avatarUrl", theAvatarService.getAvatarUrl(user.getId()));
         }
 
         return mav;
@@ -105,7 +105,4 @@ public class WebpageController {
 
         return new ModelAndView("redirect:/login");
     }
-
-
-
 }

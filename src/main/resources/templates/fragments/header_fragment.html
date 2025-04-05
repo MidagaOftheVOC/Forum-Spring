@@ -14,43 +14,51 @@
 
     <div class = "header-main-wrapper-div">
         <div class = "header-logo-div">
-            <img  width = 100px height = 50px class="header-logo-image"  src="https://media.istockphoto.com/id/2065674519/photo/rolling-says-macro.jpg?s=1024x1024&w=is&k=20&c=ZRzdKZTGsNQqzQ4HpvVsrWT1BL9NjKmB76pIteut-xs=">
+            <img  class="header-logo-image"  src="https://media.istockphoto.com/id/2065674519/photo/rolling-says-macro.jpg?s=1024x1024&w=is&k=20&c=ZRzdKZTGsNQqzQ4HpvVsrWT1BL9NjKmB76pIteut-xs=">
         </div>
 
         <div class = "header-stats-div">
-            Общ брой регистрирани: <span th:text = "${totalUsers}"></span>
+            Общ брой регистрирани: <span th:text = "${totalUsers}"></span><br>
             Общ брой нишки: <span th:text = "${totalThreads}"></span>
         </div>
 
         <div class = "account-information-div">
-            <!--    USER LOGGED IN    -->
-            <div class = "account-information-logged-in-div" th:if = "${user != null}">
-                <div class = "account-information-user-div">
-                    Влязъл като <span th:text = "${user.username}"></span>
-                    Вид потребител: <span th:text="${user.userStatus == 'BANNED' ? 'BANNED' : (user.userType == 'ADMIN' ? 'ADMIN' : 'STANDARD')}"></span>
-                    <div th:if="${user.shownUsername != null}">
-                        Излизащ като <span th:text = "${user.shownUsername}"></span>
+            <div class="account-information-logged-in-div" th:if="${user != null}">
+                <div class="account-information-logged-in-left">
+                    <div class="account-information-user-div">
+                        Влязъл като:<br>
+                        <span th:text="${user.username}"></span><br>
+                        Вид потребител:<br>
+                        <span th:text="${user.userStatus == 'BANNED' ? 'BANNED' : (user.userType == 'ADMIN' ? 'ADMIN' : 'STANDARD')}"></span>
                     </div>
-                    <div th:if="${user != null}" class = "account-information-user-logout-button-div">
-                        <a th:href = "@{/logout}">ИЗЛЕЗ</a>
+                    <div th:if="${user.shownUsername != null}">
+                        Излизащ като:<br>
+                        <span th:text="${user.shownUsername}"></span>
                     </div>
                 </div>
-                <!-- 	<img> за аватара	-->
+                <div class="account-information-logged-in-right">
+                    <img th:src="${avatarUrl}" width="100px" height="100px">
+                    <div class="account-information-logout-button-div">
+                        <a th:href="@{/logout}">ИЗЛЕЗ</a>
+                    </div>
+                </div>
             </div>
 
             <!--    USER not LOGGED IN    -->
             <div class = "account-information-not-logged-div"   th:if = "${user == null}">
                 <div class = "account-information-not-logged-text-div">
-                    Влязъл сте като ГОСТ.
+                    Влязъл сте като <b>ГОСТ</b><br>
                     Нямате право да пишете постове или започвате нишки.
                 </div>
 
-                <div class = "account-information-login-button-div">
-                    <a th:href = "@{/login}">ВЛЕЗ</a>
-                </div>
+                <div>
+                    <div class = "account-information-login-button-div">
+                        <a th:href = "@{/login}">ВЛЕЗ</a>
+                    </div>
 
-                <div class = "account-information-register-button-div">
-                    <a th:href = "@{/register}">РЕГИСТРИРАЙ СЕ</a>
+                    <div class = "account-information-register-button-div">
+                        <a th:href = "@{/register}">РЕГИСТРИРАЙ СЕ</a>
+                    </div>
                 </div>
             </div>
         </div>

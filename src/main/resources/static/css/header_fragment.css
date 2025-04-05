@@ -1,95 +1,238 @@
-/* General layout for the header */
-.header-main-wrapper-div {
-    display: flex;
-    justify-content: space-between;  /* Distribute items evenly across the width */
-    align-items: center;  /* Vertically center content */
-    /*padding: 10px 20px;*/
-    background-color: #f0f0f0;  /* Light gray background */
+/* General reset and basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Logo and stats section */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Header Fragment */
+.header-fragment-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #333;
+    color: white;
+}
+
+/* Main Wrapper */
+.header-main-wrapper-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #444;
+}
+
+/* Left Column (Logo) */
 .header-logo-div {
+    flex: 1;
 }
 
 .header-logo-image {
     width: auto;
     height: 150px;
+    object-fit: contain;
 }
 
+/* Middle Column (General Information) */
 .header-stats-div {
+    flex: 2;
+    text-align: left;
+    margin-left: 20px; /* Adds space between the image and the stats */
+    margin-right: 20px; /* Adds space between the stats and the right column */
+    border-left: 2px solid white;  /* White line separating from the left column */
+    border-right: 2px solid white; /* White line separating from the right column */
+    padding: 10px;
+}
+
+/* Account Information Column (Right Side) */
+.account-information-div {
+    flex: 2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* Logged In Account Information */
+.account-information-logged-in-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px;
+    width: 100%;
+    background-color: #444;
+    color: white;
+}
+
+/* Left Section - User Info */
+.account-information-logged-in-left {
+    flex: 1;  /* Takes up the available space */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.account-information-user-div {
+    margin-bottom: 10px;
+}
+
+.account-information-user-div span {
+    font-size: 14px;
+}
+
+/* Right Section - Avatar and Logout */
+.account-information-logged-in-right {
+    text-align: center;
     margin-left: 20px;
 }
 
-/* Account info container */
-.account-information-div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.account-information-logged-in-right img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
 }
 
-/* Account information for logged-in users */
-.account-information-logged-in-div {
-    display: flex;
-    align-items: center;
-}
-
-/* User-specific info and avatar */
-.account-information-user-div {
-    flex: 1;  /* Takes up the left side */
-    margin-right: 20px;
-}
-
-.account-information-avatar-div {
-    flex: 1;  /* Avatar to the right */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.user-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;  /* Make it a circle */
-}
-
-/* Logout button styling */
-.account-information-user-logout-button-div a {
+/* Logout Button */
+.account-information-logout-button-div {
     margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #ff0000;  /* Red button for logout */
-    color: white;
-    text-decoration: none;
 }
 
-/* User not logged in - message and buttons */
+.account-information-logout-button-div a {
+    color: white;
+    background-color: #0066cc;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.account-information-logout-button-div a:hover {
+    background-color: #004d99;
+}
+
+.account-information-logged-in-div img {
+    width: 100px;
+    height: 100px;
+    margin-left: 20px;
+}
+
+.account-information-logged-in-div div {
+    margin-bottom: 10px;
+}
+
+/* Not Logged In Account Information */
 .account-information-not-logged-div {
-    text-align: center;
+    display: flex;
+    justify-content: space-between; /* Align text to the left, buttons to the right */
+    align-items: center;
+    padding: 10px;
 }
 
 .account-information-not-logged-text-div {
+    flex: 1;
     font-size: 14px;
-    color: #555;
-    margin-bottom: 10px;
 }
 
 .account-information-login-button-div,
 .account-information-register-button-div {
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .account-information-login-button-div a,
 .account-information-register-button-div a {
-    padding: 8px 15px;
-    background-color: #007bff;
     color: white;
+    background-color: #0066cc;
+    padding: 10px;
     text-decoration: none;
+    border-radius: 5px;
 }
 
 .account-information-login-button-div a:hover,
 .account-information-register-button-div a:hover {
-    background-color: #0056b3;  /* Darker blue on hover */
+    background-color: #004d99;
+}
+
+/* Header Bottom Button Bar */
+.header-bottom-button-bar-div {
+    display: flex;
+    justify-content: space-around;
+    background-color: #222;
+    padding: 10px;
+    color: white;
+}
+
+.header-bottom-bar-threads-button,
+.header-bottom-bar-create-thread-button,
+.header-bottom-bar-search-by-category-button {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    background-color: #444;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.header-bottom-bar-threads-button:hover,
+.header-bottom-bar-create-thread-button:hover,
+.header-bottom-bar-search-by-category-button:hover {
+    background-color: #666;
+}
+
+/* Admin Only Button */
+.header-bottom-bar-user-control-button_ADMIN_ONLY {
+    background-color: #e63946;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.header-bottom-bar-user-control-button_ADMIN_ONLY:hover {
+    background-color: #d32f2f;
+}
+
+/* Flexbox Adjustments for Center Content */
+.header-main-wrapper-div .account-information-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.account-information-logged-in-div img {
+    margin-left: 20px;
+    width: 60px;
+    height: 60px;
+}
+
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .header-main-wrapper-div {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header-stats-div {
+        margin-top: 10px;
+    }
+
+    .account-information-div {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header-bottom-button-bar-div {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header-bottom-bar-threads-button,
+    .header-bottom-bar-create-thread-button,
+    .header-bottom-bar-search-by-category-button {
+        margin: 5px 0;
+    }
 }

@@ -1,4 +1,4 @@
-package app.avatar;
+package app.web;
 
 
 import app.avatar.config.FeignMultipartSupportConfig;
@@ -17,7 +17,7 @@ import java.util.UUID;
 )
 public interface AvatarServiceClient {
 
-    @GetMapping("/{userId}")
+    @GetMapping("/avatar/{userId}")
     public ResponseEntity<String> getAvatar(@PathVariable("userId") UUID userId);
 
     @PostMapping(value = "/upload_avatar/{userId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
