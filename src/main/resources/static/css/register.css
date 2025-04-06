@@ -1,0 +1,94 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e; /* Dark theme like /main */
+    color: white;
+}
+
+/* Header image styling */
+.forum-image {
+    width: 100%;
+    height: auto;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.forum-image img {
+    max-height: 250px;
+    width: auto;
+    object-fit: contain;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+/* Register form container */
+.register-form-div {
+    background-color: #2e2e2e;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #000;
+    width: 350px;
+    margin: 40px auto 20px auto;
+}
+
+.register-form-div div {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.register-form-div input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #444;
+    border: 1px solid #666;
+    border-radius: 5px;
+    color: white;
+}
+
+.register-form-div input::placeholder {
+    color: #bbb;
+}
+
+.register-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-button:hover {
+    background-color: #004d99;
+}
+
+/* Login link */
+.login-link-div {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.login-link-div a {
+    color: #00aaff;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.login-link-div a:hover {
+    text-decoration: underline;
+}

@@ -1,36 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" type = "text/css" href="/css/register.css" />
+
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
+<header>
+
+    <div class = "forum-image">
+        <img src="https://media.istockphoto.com/id/2065674519/photo/rolling-says-macro.jpg?s=1024x1024&w=is&k=20&c=ZRzdKZTGsNQqzQ4HpvVsrWT1BL9NjKmB76pIteut-xs=">
+    </div>
+
+</header>
+
 <body>
 
-<form th:action="@{/register}" th:method="POST" th:object="${registrationRequest}">
 
-    <div>
-        New username:
-    </div>
-    <input type="text" name="username" placeholder="Username" th:field="*{username}">
 
-    <div>
-        New password:
-    </div>
-    <input type="password" name="password" placeholder="Password" th:field="*{rawPassword}">
+<div class = "register-form-div">
+    <form th:action="@{/register}" th:method="POST" th:object="${registrationRequest}">
 
-    <div>
-        E-mail:
-    </div>
-    <input type="text" name="email" placeholder="Email" th:field="*{email}">
+        <div>
+            New username:
+        </div>
+        <input class = "register-username" type="text" name="username" placeholder="Username" th:field="*{username}">
 
-    <div>
-        Shown username:
-    </div>
-    <input type="text" name="shownUsername" placeholder="ShownUsername" th:field="*{shownUsername}">
+        <div>
+            New password:
+        </div>
+        <input class = "register-pass" type="password" name="password" placeholder="Password" th:field="*{rawPassword}">
 
-    <button type="submit">Register</button>
+        <div>
+            E-mail:
+        </div>
+        <input class = "register-email" type="text" name="email" placeholder="Email" th:field="*{email}">
 
-</form>
+        <div>
+            Shown username:
+        </div>
+        <input class = "register-shown-username" type="text" name="shownUsername" placeholder="ShownUsername" th:field="*{shownUsername}">
+
+        <button class = "register-button" type="submit">РЕГИСТРИРАЙ СЕ</button>
+
+    </form>
+</div>
+<div class = "login-link-div">
+    Имаш профил?<a th:href = "@{/login}">Влез тук!</a>
+</div>
 
 </body>
+
 </html>

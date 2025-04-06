@@ -1,0 +1,103 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e; /* Dark background like /main */
+    color: white;
+}
+
+/* Header image styling */
+.forum-image {
+    width: 100%;
+    height: auto;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.forum-image img {
+    max-height: 250px;
+    width: auto;
+    object-fit: contain;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+/* Login body container */
+.login-body-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+/* Login form container */
+.login-form-div {
+    background-color: #2e2e2e;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #000;
+    width: 350px;
+}
+
+.login-form-div input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #444;
+    border: 1px solid #666;
+    border-radius: 5px;
+    color: white;
+}
+
+.login-form-div input::placeholder {
+    color: #bbb;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #004d99;
+}
+
+/* Error message styling */
+.failed-login-text {
+    color: #ff4d4d;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Register link */
+.register-link-div {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.register-link-div a {
+    color: #00aaff;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.register-link-div a:hover {
+    text-decoration: underline;
+}

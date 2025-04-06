@@ -236,3 +236,9 @@ body {
         margin: 5px 0;
     }
 }
+
+
+.header-bottom-button-bar-div a {
+    color: white;          /* Inherit color from parent, or set your own */
+    text-decoration: none;   /* Remove underline if desired */
+}

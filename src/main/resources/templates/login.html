@@ -5,36 +5,47 @@
 
     <meta charset="UTF-8">
     <title>THE ФОРУМЪТ</title>
+    <link rel="stylesheet" type = "text/css" href="/css/login.css" />
 
 </head>
 
 <!--    HEAD / HEADER   -->
 
 <header>
+
+    <div class = "forum-image">
+        <img src="https://media.istockphoto.com/id/2065674519/photo/rolling-says-macro.jpg?s=1024x1024&w=is&k=20&c=ZRzdKZTGsNQqzQ4HpvVsrWT1BL9NjKmB76pIteut-xs=">
+    </div>
+
 </header>
 
 <!--    HEADER / BODY   -->
 
-
-
 <body>
+<div class = "login-body-div">
+    <div class = "login-form-div">
+        <form th:action="@{/login}" th:method="POST" th:object = "${loginRequest}">
 
-<form th:action="@{/login}" th:method="POST" th:object = "${loginRequest}">
+            <div>
+                Потребителско име:
+            </div>
+            <input class = "username-input" type="text" name="username" placeholder="Username" th:field = "*{username}"/>
+            <br>
+            <div>
+                Парола:
+            </div>
+            <input class = "password-input" type="password" name="password" placeholder="Password"  th:field = "*{password}"/>
+            <br>
+            <button class = "login-button" type="submit">ВЛЕЗ</button>
 
-    <input type="text" name="username" placeholder="Username" th:field = "*{username}"/>
-    <br>
-    <input type="password" name="password" placeholder="Password"  th:field = "*{password}"/>
-    <br>
-    <button type="submit">Login</button>
+            <p class = "failed-login-text" th:if="${errorMsg}" th:text="${errorMsg}"></p>
 
-    <p th:if="${errorMsg}" th:text="${errorMsg}"></p>
-
-</form>
-
-
-
-
-</form>
+        </form>
+    </div>
+    <div class = "register-link-div">
+        Нямаш профил?<a th:href = "@{/register}">Регистрирай се!</a>
+    </div>
+</div>
 
 </body>
 </html>
