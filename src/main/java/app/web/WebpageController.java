@@ -3,6 +3,7 @@ package app.web;
 
 import app.avatar.AvatarService;
 import app.security.AuthenticationUserData;
+import app.thread.model.Thread;
 import app.thread.service.ThreadService;
 import app.user.model.User;
 import app.user.service.UserService;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class WebpageController {
@@ -39,19 +42,24 @@ public class WebpageController {
     }
 
     @GetMapping("/main")
-    public ModelAndView showMainPage(@AuthenticationPrincipal AuthenticationUserData auth){
+    public ModelAndView showMainPage(
+            @RequestParam(defaultValue = "recent") String sort,
+            @AuthenticationPrincipal AuthenticationUserData auth){
         ModelAndView mav = new ModelAndView();
 
         //  COMMON HEADER DATA
         mav.addObject("totalUsers", theUserService.getUserCount());
         mav.addObject("totalThreads", theThreadService.getThreadCount());
 
+        List<Thread> a = theThreadService.getThreadListBySortingMethod(sort);
+
+        mav.addObject("threads", a.toString()  );
+
+
+
         if(auth != null){   // LOGGED USER-SPECIFIC DATA
             User user = theUserService.getUserById(auth.getUserUuid());
             mav.addObject("user", user);
-
-            theAvatarService.test();
-
             mav.addObject("avatarUrl", theAvatarService.getAvatarUrl(user.getId()));
         }
 

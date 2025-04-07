@@ -2,7 +2,6 @@ package app.thread.repository;
 
 import app.thread.model.Thread;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,10 +22,10 @@ public interface ThreadRepository extends JpaRepository<Thread, Integer> {
 
     Optional<Thread> findById(int id);
 
-    // TODO
-    //  must select top @howMany rows ordered by views
-    //@Query( "select t from threads order by t.views")
-    //List<Thread> findXmostViewedThreads(int howMany);
 
+    List<Thread> findTop10ByOrderByCreationDateDesc();
 
+    List<Thread> findTop10ByOrderByViewsDesc();
+
+    List<Thread> findTop10ByOrderByPostsDesc();
 }

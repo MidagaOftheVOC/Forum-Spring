@@ -1,6 +1,7 @@
 package app.thread.model;
 
 
+import app.category.model.Category;
 import app.post.model.Post;
 import app.user.model.User;
 import jakarta.persistence.*;
@@ -25,7 +26,7 @@ public class Thread {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "original_poster_id", referencedColumnName = "user_uuid")
+    @JoinColumn(name = "original_poster_uuid", referencedColumnName = "user_uuid")
     private User originalPoster;
 
     @OneToMany(mappedBy = "threadWherePosted", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -46,10 +47,17 @@ public class Thread {
     @Column(name = "view_count")
     private int views;
 
-    @Column(name = "post_count")
+    @Column(name = "posts_count")
     private int posts;
 
     @Column(name = "date_creation")
     private LocalDateTime creationDate;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "category_thread_helper",
+        joinColumns = @JoinColumn(name = "thread_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<Category> categories;
 
 }

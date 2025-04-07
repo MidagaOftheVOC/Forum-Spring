@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment = "post(post)" class = "post-fragment-div">
+
+
+    <div class = "post">
+
+        <div class = "post-header">
+
+            <div class = "post-header-vote-options">
+                <a th:href="@{/like_post/{postId} (postId = ${post.id})}">+</a>
+                <a th:href="@{/unrate_post/{postId} (postId = ${post.id})}">/</a>
+                <a th:href="@{/dislike_post/{postId} (postId = ${post.id})}">-</a>
+                <div class = "post-header-date"><span th:text = "${#dates.format(post.creationDate, 'dd MMM yyyy HH:mm')}"></span></div>
+            </div>
+
+            <div class = "post-header-user-info">
+                <span th:text="${post.points}"></span>#<span th:text="${post.id}"></span>
+            </div>
+        </div>
+
+        <div class = "text-portion">
+            <span th:text = "${post.content}"></span>
+        </div>
+
+        <div class = "upper-right-div-avatar">
+            <div class = "post-user-name">
+                <span th:text = "${shownUsername}"></span>
+            </div>
+            <img th:src="${avatarUrl}" width="250px" height="250px">
+        </div>
+
+        <div class = "post-quote-wrapper-div">
+            <div class = "post-quote-small-left-column">
+                <span th:text = "${shownUsername}"></span> казва:
+            </div>
+            <div class = "post-quote-body">
+                <span th:text = "${user.quote}"></span>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

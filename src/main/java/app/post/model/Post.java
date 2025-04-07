@@ -15,11 +15,11 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "thread_id_where_posted", referencedColumnName = "id")
     private Thread threadWherePosted;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "original_poster_uuid", referencedColumnName = "user_uuid")
     private User originalPoster;
 

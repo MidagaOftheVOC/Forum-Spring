@@ -1,4 +1,4 @@
-package app.web;
+package app.avatar;
 
 
 import app.avatar.config.FeignMultipartSupportConfig;
@@ -29,6 +29,9 @@ public interface AvatarServiceClient {
 
     @GetMapping("/avatar_test")
     public ResponseEntity<Void> test();
+
+    @GetMapping("/get_storage_path")
+    public ResponseEntity<String> getStoragePath();
 
 }
 

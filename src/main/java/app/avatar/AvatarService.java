@@ -1,6 +1,5 @@
 package app.avatar;
 
-import app.web.AvatarServiceClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +16,10 @@ public class AvatarService {
     )
     {
         theAvatarClient = avatarServiceClient;
+    }
+
+    public String getAvatarStoragePath(){
+        return theAvatarClient.getStoragePath().getBody();
     }
 
     //  sole purpose is rerouting

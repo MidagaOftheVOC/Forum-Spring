@@ -8,6 +8,8 @@ import app.thread.repository.ThreadRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Slf4j
 @Service
@@ -24,7 +26,19 @@ public class ThreadService {
 
 
 
-
+    public List<Thread> getThreadListBySortingMethod(String sort){
+        switch(sort){
+            case "views"    -> {
+                return theThreadRepository.findTop10ByOrderByViewsDesc();
+            }
+            case "posts"    -> {
+                return theThreadRepository.findTop10ByOrderByPostsDesc();
+            }
+            default         -> {    // recent by default, would also cover malicious strange query inputs
+                return theThreadRepository.findTop10ByOrderByCreationDateDesc();
+            }
+        }
+    }
 
     // we're not expecting more than 4 billion threads
     public int getThreadCount(){

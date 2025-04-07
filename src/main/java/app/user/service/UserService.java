@@ -45,6 +45,10 @@ public class UserService implements UserDetailsService {
         thePasswordEncoder = _passEncoder;
     }
 
+    public String getCorrectNameForDisplay(User user){
+        return (user.getShownUsername() == null) ? user.getUsername() : user.getShownUsername();
+    }
+
     @Override
     public UserDetails loadUserByUsername(String _username) throws UsernameNotFoundException {
 
@@ -157,6 +161,7 @@ public class UserService implements UserDetailsService {
 
         newUser.setLastRedactDate(null);
         newUser.setQuote(null);
+
 
         // dates are created at entry creation in DB
 
