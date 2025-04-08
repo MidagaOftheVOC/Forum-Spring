@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -24,7 +25,16 @@ public class ThreadService {
         theThreadRepository = _thread_repo;
     }
 
+    public Thread getThread(int threadId){
+        Optional<Thread> t = theThreadRepository.findById(threadId);
 
+        if(t.isPresent()){
+            return t.get();
+        }
+        else{
+            throw new  ForumThreadNotFoundException("Thread with ID [%d] not found in repository.".formatted(threadId));
+        }
+    }
 
     public List<Thread> getThreadListBySortingMethod(String sort){
         switch(sort){
@@ -45,12 +55,11 @@ public class ThreadService {
         return (int)theThreadRepository.count();
     }
 
+    // TODO: fix convention
     public void changeThreadLockStatus(int _target_thread_id)
         throws ForumThreadNotFoundException {
 
-        Thread thread = theThreadRepository.findById(_target_thread_id).orElseThrow(() -> new ForumThreadNotFoundException(
-                ("Thread with ID[%d] not found." + (GCV.isDebugging() ? "@changeThreadLockStatus" : "")).formatted(_target_thread_id)
-        ));
+        Thread thread = getThread(_target_thread_id);
 
         log.info("Thread with ID[%d] LOCK status changed to " + !thread.isLocked());
         thread.setLocked(!thread.isLocked());

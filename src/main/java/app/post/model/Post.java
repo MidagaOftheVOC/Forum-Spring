@@ -4,9 +4,13 @@ package app.post.model;
 import app.thread.model.Thread;
 import app.user.model.User;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
+@Data
+@ToString(exclude = {"threadWherePosted", "originalPoster"})
 @Entity
 @Table(name = "posts")
 public class Post {

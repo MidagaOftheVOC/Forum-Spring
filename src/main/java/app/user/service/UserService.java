@@ -69,6 +69,10 @@ public class UserService implements UserDetailsService {
         );
     }
 
+    public User getUserByAuthenticationData(AuthenticationUserData auth){
+        return getUserById(auth.getUserUuid());
+    }
+
     public int getUserCount(){
         return (int)theUserRepository.count();
     }

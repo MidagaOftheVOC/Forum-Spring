@@ -2,39 +2,37 @@ package app.web;
 
 
 import app.avatar.AvatarService;
+import app.post.model.Post;
+import app.post.service.PostService;
 import app.security.AuthenticationUserData;
 import app.thread.model.Thread;
 import app.thread.service.ThreadService;
 import app.user.model.User;
 import app.user.service.UserService;
+import app.web.common.CommonService;
 import app.web.dto.LoginRequest;
 import app.web.dto.RegistrationRequest;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Controller
 public class WebpageController {
 
-    private final UserService theUserService;
-    private final ThreadService theThreadService;
-    private final AvatarService theAvatarService;
+    final private UserService theUserService;
+    final private ThreadService theThreadService;
+    final private AvatarService theAvatarService;
+    final private PostService thePostService;
 
-
-    public WebpageController(
-            UserService _userService,
-            ThreadService _threadService,
-            AvatarService _avatarService
-    ){
-        theUserService = _userService;
-        theThreadService = _threadService;
-        theAvatarService = _avatarService;
-    }
+    final private CommonService theCommonService;
 
     @GetMapping("/")
     public String emptyPageRedirectoToMain(){
@@ -45,24 +43,11 @@ public class WebpageController {
     public ModelAndView showMainPage(
             @RequestParam(defaultValue = "recent") String sort,
             @AuthenticationPrincipal AuthenticationUserData auth){
-        ModelAndView mav = new ModelAndView();
+        ModelAndView mav = theCommonService.getCommonHeaderMAV(auth); // includes common header data
 
-        //  COMMON HEADER DATA
-        mav.addObject("totalUsers", theUserService.getUserCount());
-        mav.addObject("totalThreads", theThreadService.getThreadCount());
+        List<Thread> sortedThreadList = theThreadService.getThreadListBySortingMethod(sort);
 
-        List<Thread> a = theThreadService.getThreadListBySortingMethod(sort);
-
-        mav.addObject("threads", a.toString()  );
-
-
-
-        if(auth != null){   // LOGGED USER-SPECIFIC DATA
-            User user = theUserService.getUserById(auth.getUserUuid());
-            mav.addObject("user", user);
-            mav.addObject("avatarUrl", theAvatarService.getAvatarUrl(user.getId()));
-        }
-
+        mav.addObject("threads", sortedThreadList);
         return mav;
     }
 

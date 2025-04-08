@@ -23,10 +23,8 @@
 
 <div class="page-content-wrapper">
 
-    <!-- Left column (empty for now) -->
     <div class="side-column left-column"></div>
 
-    <!-- Middle column (main content) -->
     <div class="middle-column">
 
         <!-- Sorting bar -->
@@ -48,18 +46,22 @@
             </div>
         </div>
 
-        <!-- Scrollable threads container -->
         <div class="threads-container">
-            <div th:each="thread : ${threads}">
-                <div th:replace="~{fragments/thread_fragment.html :: thread_frag(thread)}"></div>
+
+
+
+            <div th:each="thr : ${threads}">
+                <div th:if="${thr == null}">thr is NULL</div>
+                <div th:if="${thr != null}">thr is OK: <span th:text="${thr.id}"></span></div>
+
+
+                <div th:replace="~{fragments/thread_fragment.html :: thread_frag(${thr})}"></div>
             </div>
         </div>
 
     </div>
 
-    <!-- Right column (empty for now) -->
     <div class="side-column right-column"></div>
-
 </div>
 
 </body>

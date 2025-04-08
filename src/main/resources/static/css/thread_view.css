@@ -1,0 +1,103 @@
+/* General layout for the page */
+.page-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.side-column {
+    width: 15%; /* Adjust the width for side columns */
+    padding: 10px;
+}
+
+.left-column {
+    /* Custom styles for the left column */
+}
+
+.right-column {
+    /* Custom styles for the right column */
+}
+
+.middle-column {
+    width: 70%; /* Middle column is the biggest */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Styling for the post container */
+.post-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* After post list div - for the post creation form and login prompt */
+.after-post-list-div {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Styling for the post creation form */
+.post-creation-div {
+    width: 100%;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.post-creation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* space between elements */
+    width: 100%;
+}
+
+.post-creation-form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.post-creation-form button {
+    align-self: flex-end; /* Button aligns to the right */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.post-creation-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Failed post creation message */
+.failed-post-creation-text {
+    color: red;
+    font-size: 14px;
+}
+
+/* Styling for the "must login" message */
+.user-must-login-to-post-div {
+    font-size: 16px;
+    color: #555;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.user-must-login-to-post-div a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.user-must-login-to-post-div a:hover {
+    text-decoration: underline;
+}

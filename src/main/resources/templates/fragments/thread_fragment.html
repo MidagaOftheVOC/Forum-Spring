@@ -8,15 +8,10 @@
 
 
 <div th:fragment = "thread_frag(thr)" class = "thread-fragment-div">
-
-
-    <div th:if="${thr == null}">thr is NULL</div>
-    <div th:if="${thr != null}">thr is OK: <span th:text="${thr.id}"></span></div>
-
-    <div class = "thread" th:if="false">
+    <div class = "thread">
 
         <div class = "thread-title">
-            <span th:text = "${thr.threadTitle}"></span> <span th:if = "${thr.isLocked}">(заключена)</span>
+            <span th:text = "${thr.threadTitle}"></span> <span style="color: grey;" th:if = "${thr.isLocked}">(заключена)</span>
         </div>
 
         <div class = "thread-body">
@@ -30,7 +25,7 @@
                 <!--   REMEMBER #### FOR THE COLORS HERE     -->
                 <div th:style="background-color: #${category.categoryColour}"  class = "category-item">
                     <a
-                        th:href="@{/category/{categoryName}(categoryName=${category.categoryName})}"
+                        th:href="@{/category/{categoryName} (categoryName=${category.categoryName})}"
                         style="color: white; text-decoration: none;"
                     >
                         <span th:text = "${category.categoryName}"></span>
@@ -42,7 +37,7 @@
         <div class = "bottom-div">
             <!-- това вляво -->
             <div class = "user-creation-info">
-                От <a th:href = "@{/users/${thr.originalPoster.id}}"><span th:text="${thr.originalPoster.shownUsername == null ? thr.originalPoster.username : thr.originalPoster.shownUsername}"></span></a>, създадено на <span th:text="${${#dates.format(post.creationDate, 'dd MMM yyyy HH:mm')}}"></span>
+                От <a th:href = "@{/users/{opId} (opId = ${thr.originalPoster.id})}"><span th:text="${thr.originalPoster.shownUsername == null ? thr.originalPoster.username : thr.originalPoster.shownUsername}"></span></a>, създадена на <span th:text="${#temporals.format(thr.creationDate, 'dd MMM yyyy HH:mm')}"></span>
             </div>
             <!-- това вдясно -->
             <div>

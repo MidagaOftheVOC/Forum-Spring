@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type = "text/css" href="/css/header_fragment.css" />
+    <link rel="stylesheet" type = "text/css" href="/css/thread_fragment.css" />
+    <link rel="stylesheet" type = "text/css" href="/css/post_fragment.css" />
+    <link rel="stylesheet" type = "text/css" href="/css/thread_view.css" />
+
+
+    <title th:text = "${thread.threadTitle}"></title>
+    <!--
+        this page must have in the MAV:
+            - 1 Thread object passed as "thread"
+            - Collection of Post objects as "posts"
+
+        and may send out:
+            - 1 object of type PostCreationRequest
+      -->
+</head>
+
+<header>
+
+    <div th:insert = "~{fragments/header_fragment :: header}"></div>
+
+</header>
+
+<body>
+
+<div class="page-content-wrapper">
+
+    <div class="side-column left-column"></div>
+
+    <div class="middle-column">
+
+        <div th:insert = "~{fragments/thread_fragment :: thread_frag(${thread})}"></div>
+
+        <div class = "post-container">
+
+            <div th:each = "postWithAvatar : ${posts}">
+
+                <div th:replace = "~{fragments/post_fragment :: post(${postWithAvatar})}"></div>
+
+            </div>
+
+            <div class = "after-post-list-div">
+                <div th:if="${user != null}" class = "post-creation-div">
+                    <form class = "post-creation-form" th:method = "POST" th:action="@{/create_post}" th:object = "${postCreationRequest}">
+                        <input name="content" placeholder="Напиши отговор...">
+                        <br>
+                        <button type="submit">Прати</button>
+                    </form>
+
+                    <p class = "failed-post-creation-text" th:if="${errMsg_postCreation}" th:text="${errMsg_postCreation}"></p>
+                </div>
+                <div class="user-must-login-to-post-div" th:if="${user == null}">
+                    Моля, <a th:href="@{/login}">влезте в профила си</a>, за да пишете постове...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="side-column right-column"></div>
+</div>
+
+
+</body>
+</html>

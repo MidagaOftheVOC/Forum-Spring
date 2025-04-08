@@ -17,6 +17,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = {"threadList", "postList"})
 @Entity
 @Table(name = "users")
 public class User {
@@ -66,6 +67,10 @@ public class User {
 
     @OneToMany(mappedBy = "originalPoster", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Post> postList;
+
+    public String whichUsernameToShow(){
+        return (shownUsername == null) ? username : shownUsername;
+    }
 
     public String debugString(){
         return "User object -> { id = [%s], username = [%s], shown_username = [%s], userhash = [%s] }"

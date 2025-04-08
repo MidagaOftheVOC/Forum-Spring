@@ -1,0 +1,118 @@
+.post-fragment-div {
+    margin-bottom: 20px;
+    width: 100%;
+    font-family: Tahoma, sans-serif;
+    background-color: white;
+}
+
+.post {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+/* === MAIN POST PART === */
+.post-main-part {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+/* LEFT SIDE: text content, vote, date, stats */
+.post-left-half {
+    flex-grow: 1;
+    padding-right: 15px;
+}
+
+/* HEADER (vote row + date + stats) */
+.post-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid black;
+}
+
+.post-header-votes {
+    border-right: 1px solid black;
+    padding-right: 4px;
+}
+
+/* Vote links: no button styles */
+.post-header-votes a {
+    margin-right: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+/* Right section of header */
+
+.post-header-row-right-div {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    padding-left: 10px;
+}
+
+/* Optional: give these a bit more control for spacing */
+.post-date-div {
+    font-size: 13px;
+    color: #555;
+    margin-right: auto;
+}
+
+.post-stats-div {
+    font-size: 13px;
+    margin-left: auto;
+}
+
+
+/* Text section of post */
+.post-text-section {
+    font-size: 15px;
+    color: #222;
+    white-space: pre-wrap;
+}
+
+/* RIGHT SIDE: avatar + username */
+.post-right-half {
+    text-align: center;
+    min-width: 250px;
+    border: 1px solid black;
+
+}
+
+.post-op-username {
+    margin: 5px;
+}
+
+.post-op-avatar img {
+    display: block;
+    width: 250px;
+    height: 250px;
+    border-top: 1px solid black;
+}
+
+/* === QUOTE SECTION === */
+.post-quote-wrapper-div {
+    display: flex;
+    gap: 10px;
+    padding-top: 5px;
+    font-size: 14px;
+}
+
+.post-quote-small-left-column {
+    min-width: 120px;
+    font-weight: bold;
+    color: #555;
+}
+
+.post-quote-body {
+    background-color: #eeeeee;
+    border: 1px solid black;
+    padding: 8px;
+    flex-grow: 1;
+    font-style: italic;
+}

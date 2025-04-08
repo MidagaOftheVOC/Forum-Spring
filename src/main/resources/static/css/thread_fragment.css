@@ -1,0 +1,112 @@
+/* General styles for the thread fragment */
+.thread-fragment-div {
+    width: 100%; /* Takes up the full width of the container */
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.thread {
+    width: 100%; /* Full width of its parent container */
+    border: 1px solid black; /* Black outline around the whole thread */
+    border-radius: 0; /* No border-radius */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+/* Title section */
+.thread-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ccc; /* Rectangle line separating the title */
+}
+
+/* Thread body section */
+.thread-body {
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #555;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ccc; /* Rectangle line separating the body */
+}
+
+/* Categories section */
+.category-div {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-item {
+    padding: 10px 15px;
+    border-radius: 5px; /* Rounded corners for the category items */
+    background-color: grey; /* Default grey, will be overridden */
+    font-size: 14px;
+}
+
+.category-item a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Bottom section (user info and thread stats) */
+.bottom-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 2px solid #ccc; /* Rectangle line separating the bottom section */
+}
+
+.user-creation-info {
+    text-align: left;
+}
+
+.bottom-div > div {
+    display: inline-block;
+}
+
+/* Date and creation info inside user-creation-info */
+.user-creation-info a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.user-creation-info a:hover {
+    text-decoration: underline;
+}
+
+/* Views and posts (on the right) */
+.bottom-div > div:last-child {
+    text-align: right;
+}
+
+/* Grey color for the locked thread label */
+.thread-title span {
+    font-size: 14px;
+    color: grey;
+}
+
+/* Category color customization */
+.category-item {
+    background-color: #ccc; /* Default background for categories */
+}
+
+/* Responsive Design for Categories */
+@media (max-width: 768px) {
+    .category-div {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

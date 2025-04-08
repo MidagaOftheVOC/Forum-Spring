@@ -6,49 +6,56 @@
 </head>
 <body>
 
-<div th:fragment = "post(post)" class = "post-fragment-div">
+<div th:fragment="post(post)" class="post-fragment-div">
 
+    <div class="post">
+        <div class = "post-main-part">
+            <div class = "post-left-half">
+                <div class = "post-header-row">
+                    <div class = "post-header-votes">
+                        <a th:href="@{/like_post/{postId}(postId=${post.post.id})}"> + </a>
+                        <a th:href="@{/unrate_post/{postId}(postId=${post.post.id})}"> / </a>
+                        <a th:href="@{/dislike_post/{postId}(postId=${post.post.id})}"> - </a>
+                    </div>
+                    <div class ="post-header-row-right-div">
+                        <div class = "post-date-div">
+                            <span th:text="${#temporals.format(post.post.creationDate, 'dd MMM yyyy HH:mm')}"></span>
+                        </div>
+                        <div class = "post-stats-div">
+                            <span th:text="${post.post.points}"></span> # <span th:text="${post.post.id}"></span>
+                        </div>
+                    </div>
+                </div>
 
-    <div class = "post">
-
-        <div class = "post-header">
-
-            <div class = "post-header-vote-options">
-                <a th:href="@{/like_post/{postId} (postId = ${post.id})}">+</a>
-                <a th:href="@{/unrate_post/{postId} (postId = ${post.id})}">/</a>
-                <a th:href="@{/dislike_post/{postId} (postId = ${post.id})}">-</a>
-                <div class = "post-header-date"><span th:text = "${#dates.format(post.creationDate, 'dd MMM yyyy HH:mm')}"></span></div>
+                <div class = "post-text-section">
+                    <span th:text="${post.post.content}"></span>
+                </div>
             </div>
 
-            <div class = "post-header-user-info">
-                <span th:text="${post.points}"></span>#<span th:text="${post.id}"></span>
+            <div class = "post-right-half">
+                <div class = "post-op-username">
+                    <span class="post-user-name" th:text="${post.post.originalPoster.whichUsernameToShow()}"></span>
+                </div>
+                <div class = "post-op-avatar">
+                    <img th:src="${post.avatarUrl}" width="250" height="250">
+                </div>
             </div>
         </div>
+        <!-- QUOTE SECTION -->
+        <div th:if="${post.post.originalPoster.quote != null and post.post.originalPoster.quote != ''}" class="post-quote-wrapper-div">
 
-        <div class = "text-portion">
-            <span th:text = "${post.content}"></span>
-        </div>
-
-        <div class = "upper-right-div-avatar">
-            <div class = "post-user-name">
-                <span th:text = "${shownUsername}"></span>
+            <div class="post-quote-small-left-column">
+                <span th:text="${post.post.originalPoster.whichUsernameToShow()}"></span> казва:
             </div>
-            <img th:src="${avatarUrl}" width="250px" height="250px">
-        </div>
-
-        <div class = "post-quote-wrapper-div">
-            <div class = "post-quote-small-left-column">
-                <span th:text = "${shownUsername}"></span> казва:
-            </div>
-            <div class = "post-quote-body">
-                <span th:text = "${user.quote}"></span>
+            <div class="post-quote-body">
+                <span th:text="${post.post.originalPoster.quote}"></span>
             </div>
         </div>
 
     </div>
-
-
 </div>
+
+
 
 </body>
 </html>
