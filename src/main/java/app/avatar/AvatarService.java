@@ -28,13 +28,7 @@ public class AvatarService {
     }
 
     public String getAvatarUrl(UUID userId){
-        System.out.printf("Getting avatar URL for user [%s]", userId.toString());
-
         ResponseEntity<String> response = theAvatarClient.getAvatar(userId);
-
-        // This one always returns 200 OK
-
-        System.out.println("GET request returns: " + response.getBody());
         return response.getBody();
     }
 

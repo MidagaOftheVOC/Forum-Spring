@@ -72,6 +72,20 @@ public class User {
         return (shownUsername == null) ? username : shownUsername;
     }
 
+    public String bulgarianType(){
+        if(userStatus == UserStatus.BANNED){
+            return "Баннат";
+        }
+        switch (userType){
+            case ADMIN -> {
+                return "Админ";
+            }
+            default -> {
+                return "Стандартен";
+            }
+        }
+    }
+
     public String debugString(){
         return "User object -> { id = [%s], username = [%s], shown_username = [%s], userhash = [%s] }"
                 .formatted(id.toString(), username, shownUsername, userhash);

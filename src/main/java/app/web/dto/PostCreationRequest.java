@@ -1,8 +1,11 @@
 package app.web.dto;
 
 
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -12,11 +15,11 @@ import java.time.LocalDateTime;
  *
  */
 @Data
-@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PostCreationRequest {
 
-    int threadIdWherePosted;
-
-    String content;
+    @Size(min = 1, max = 1024)
+    private String content;
 
 }

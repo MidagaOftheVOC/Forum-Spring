@@ -116,3 +116,16 @@
     flex-grow: 1;
     font-style: italic;
 }
+
+
+.rating-button {
+    background: none;   /* Remove any default background */
+    border: none;       /* Remove border */
+    padding: 0;         /* Remove any padding */
+    font-size: 24px;    /* Make the symbol large enough */
+    color: inherit;     /* Inherit the color from the parent, or you can use a custom color */
+    cursor: pointer;    /* Change the cursor to pointer to show it's clickable */
+    display: inline-flex; /* Make sure it's inline with other elements */
+    justify-content: center; /* Align the symbol nicely */
+    align-items: center;
+}

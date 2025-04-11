@@ -27,9 +27,10 @@
                 <div class="account-information-logged-in-left">
                     <div class="account-information-user-div">
                         Влязъл като:<br>
-                        <span th:text="${user.username}"></span><br>
+                        <a th:href = "@{/user/{userId} (userId = ${user.id})}" style="text-decoration:none; color: skyblue;"
+                        ><span th:text="${user.username}"></span></a>   <br>
                         Вид потребител:<br>
-                        <span th:text="${user.userStatus == 'BANNED' ? 'BANNED' : (user.userType == 'ADMIN' ? 'ADMIN' : 'STANDARD')}"></span>
+                        <span th:text="${user.bulgarianType()}"></span>
                     </div>
                     <div th:if="${user.shownUsername != null}">
                         Излизащ като:<br>
@@ -70,8 +71,8 @@
             <a th:href = "@{/main}">Начало</a>
         </div>
 
-        <div class = "header-bottom-bar-create-thread-button">
-            <a th:href = "@{/create_thread}">Създай нишка</a>
+        <div th:if = "${user != null}" class = "header-bottom-bar-create-thread-button">
+            <a th:href = "@{/thread/create}">Създай нишка</a>
         </div>
 
         <div class = "header-bottom-bar-search-by-category-button">

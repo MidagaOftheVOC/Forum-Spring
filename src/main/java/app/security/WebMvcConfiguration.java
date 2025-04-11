@@ -29,7 +29,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                         .requestMatchers("/avatar/**").permitAll()                  // remove
                         .requestMatchers("/thread/view/**").permitAll()             // stays
 
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")

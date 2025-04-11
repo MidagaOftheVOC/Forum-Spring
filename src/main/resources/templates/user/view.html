@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+
+  <link rel="stylesheet" type = "text/css" href="/css/user_view.css" />
+
+
+</head>
+<body>
+
+<div class="user-profile-fragment">
+  <div class="user-profile-box">
+    <div class="user-profile-avatar" th:if="${avatarUrl != null}">
+      <img th:src="@{${avatarUrl}}" alt="User Avatar">
+    </div>
+
+    <div class="user-profile-info">
+      <div class="user-profile-row">
+        <span class="label">Потребителско име:</span>
+        <span class="value" th:text="${user.username}"></span>
+      </div>
+      <div th:if="${user.shownUsername != null}" class="user-profile-row">
+        <span class="label">Показано име:</span>
+        <span class="value" th:text="${user.shownUsername}"></span>
+      </div>
+      <div class="user-profile-row">
+        <span class="label">Е-мейл:</span>
+        <span class="value" th:text="${user.email}"></span>
+      </div>
+      <div class="user-profile-row">
+        <span class="label">Статус:</span>
+        <span class="value" th:text="${user.userStatus}"></span>
+      </div>
+      <div class="user-profile-row">
+        <span class="label">Вид профил:</span>
+        <span class="value" th:text="${user.userType}"></span>
+      </div>
+      <div class="user-profile-row">
+        <span class="label">Общо качени постове:</span>
+        <span class="value" th:text="${user.totalPosts}"></span>
+      </div>
+      <div th:if="${user.shownUsername != null}" class="user-profile-row">
+        <span class="label">Цитат:</span>
+        <span class="value italic" th:text="${user.quote}"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

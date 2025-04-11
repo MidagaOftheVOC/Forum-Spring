@@ -11,7 +11,7 @@
     <div class = "thread">
 
         <div class = "thread-title">
-            <span th:text = "${thr.threadTitle}"></span> <span style="color: grey;" th:if = "${thr.isLocked}">(заключена)</span>
+            <a style = "text-decoration:none;" th:href="@{/thread/view/{thrId} (thrId = ${thr.id})}"><span th:text = "${thr.threadTitle}"></span></a> <span style="color: grey;" th:if = "${thr.isLocked}">(заключена)</span>
         </div>
 
         <div class = "thread-body">

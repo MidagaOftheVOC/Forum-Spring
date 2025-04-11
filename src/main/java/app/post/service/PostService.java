@@ -1,22 +1,22 @@
 package app.post.service;
 
 
-import app.post.PostMalformedCreationRequest;
+import app.post.ForumPostNotFoundException;
 import app.post.model.Post;
 import app.post.repository.PostRepository;
-import app.thread.repository.ThreadRepository;
+import app.security.AuthenticationUserData;
+import app.thread.model.Thread;
 import app.thread.service.ThreadService;
 import app.user.model.User;
-import app.user.repository.UserRepository;
 import app.user.service.UserService;
 import app.web.dto.PostCreationRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @AllArgsConstructor
@@ -34,32 +34,59 @@ public class PostService {
     }
 
     public void validatePostCreationRequest(PostCreationRequest pcr){
-        if(pcr.getContent().isEmpty() || pcr.getContent().isBlank()){
-            throw new PostMalformedCreationRequest("PostCreationRequest object with empty 'content' field.");
-        }
-        if(pcr.getContent().length() >= POST_CHAR_LIMIT){
-            throw new PostMalformedCreationRequest("PostCreationRequest.content.length() is longer than the POST_CHAR_LIMIT");
-        }
+
     }
 
-    public void createPost(
+    public void modifyVoteCount(
+            int postId,
+            int change
+    ) {
+        Post p = getPost(postId);
+        p.setPoints(
+                p.getPoints() + change
+        );
+        thePostRepository.save(p);
+    }
+
+    public Post getPost(int postId){
+        Optional<Post> p = thePostRepository.findById(postId);
+
+        if(!p.isPresent()){
+            throw new ForumPostNotFoundException(
+                    "Post with ID [%s] not found."
+                            .formatted(postId)
+            );
+        }
+
+        return p.get();
+    }
+
+    public void registerPost(
+            AuthenticationUserData auth,
             PostCreationRequest pcr,
-            User authenticatedUser
+            int threadId
     ){
         validatePostCreationRequest(pcr);
+        Post self = new Post();
 
-        Post newPost = new Post();
 
-        newPost.setContent(pcr.getContent());
-        newPost.setThreadWherePosted(
-                theThreadService.getThread(pcr.getThreadIdWherePosted())
-        );
+        // Thread interraction
+        Thread currentThread = theThreadService.getThread(threadId);
+        theThreadService.canTakePosts(threadId);
 
-        newPost.setCreationDate(LocalDateTime.now());
-        newPost.setOriginalPoster(authenticatedUser);
-        newPost.setPoints(0);
+        // User interraction
+        User originalPoster = theUserService.getUserById(auth.getUserUuid());
+        theUserService.isAbleToPost(auth.getUserUuid());
+
+        self.setOriginalPoster(originalPoster);
+        self.setThreadWherePosted(currentThread);
+        self.setContent(pcr.getContent());
+        self.setCreationDate(LocalDateTime.now());
+
+        thePostRepository.save(self);
+        theThreadService.incrementPostCount(threadId);
+        theUserService.registerPost(auth.getUserUuid());
     }
-
 
 
 

@@ -34,4 +34,14 @@ public class CommonService {
         return mav;
     }
 
+    public ModelAndView getCommonHeaderMAV(User user){
+        ModelAndView mav = new ModelAndView();
+        User authUser = theUserService.getUserById(user.getId());
+        mav.addObject("user", authUser);
+        mav.addObject("loggedUserURL", theAvatarService.getAvatarUrl(authUser.getId()));
+        mav.addObject("totalUsers", theUserService.getUserCount());
+        mav.addObject("totalThreads", theThreadService.getThreadCount());
+        return mav;
+    }
+
 }

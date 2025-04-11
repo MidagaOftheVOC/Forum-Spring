@@ -17,4 +17,5 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
      */
     List<Post> findAllByThreadWherePosted_IdOrderByCreationDateAsc(int threadId);
 
+    Optional<Post> findById(int postId);
 }

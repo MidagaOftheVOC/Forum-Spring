@@ -2,7 +2,9 @@ package app.user.service;
 
 
 import app.GCV;
+import app.post.model.Post;
 import app.security.AuthenticationUserData;
+import app.user.ForumUserBannedUserAttemptsAction;
 import app.user.ForumUserNotFound;
 import app.user.RegisteringExistingUserException;
 import app.user.model.User;
@@ -11,6 +13,7 @@ import app.user.model.UserType;
 import app.user.repository.UserRepository;
 import app.web.dto.RegistrationRequest;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,6 +32,7 @@ import org.slf4j.LoggerFactory;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class UserService implements UserDetailsService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
@@ -36,13 +40,25 @@ public class UserService implements UserDetailsService {
     private final UserRepository theUserRepository;
     private final PasswordEncoder thePasswordEncoder;
 
-    public UserService(
-            UserRepository _newUserRepo,
-            PasswordEncoder _passEncoder
-    )
-    {
-        theUserRepository = _newUserRepo;
-        thePasswordEncoder = _passEncoder;
+    public void registerPost(UUID userId){
+        User u = getUserById(userId);
+        u.setTotalPosts(
+                u.getTotalPosts() + 1
+        );
+    }
+
+    public boolean isAbleToPost(UUID userId){
+
+        User u = getUserById(userId);
+        if(u.getUserStatus().equals(UserStatus.BANNED)
+        || u.getUserStatus().equals(UserStatus.INACTIVE)) {
+            throw new ForumUserBannedUserAttemptsAction(
+                    "User with ID [%s] is banned and attempted action"
+                            .formatted(userId.toString())
+            );
+        }
+
+        return true;
     }
 
     public String getCorrectNameForDisplay(User user){

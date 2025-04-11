@@ -1,10 +1,13 @@
 package app.avatar;
 
+import app.GCV;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @RestController
@@ -37,17 +40,18 @@ public class AvatarController {
     }
 
     @PostMapping("/upload_avatar/{userId}")
-    public ResponseEntity<Void> uploadAvatar(@PathVariable("userId") UUID userId,
-                                             @RequestParam("file") MultipartFile file)
-    {
-        System.out.println("Entered avatar-svc POST mapping in monolith");
-        ResponseEntity<Void> response = theAvatarServiceClient.uploadAvatar(userId, file);
+    public void uploadAvatar(@PathVariable("userId") UUID userId,
+                             @RequestParam("file") MultipartFile file,
+                             HttpServletResponse response) throws IOException {
+        if (GCV.isDebugging()) System.out.println("Entered avatar-svc POST mapping in monolith");
 
-        if(!response.getStatusCode().is2xxSuccessful()){
-            throw new RuntimeException("AvatarController-@PostMapping :: %s".formatted(response.getStatusCode().toString()));
+        ResponseEntity<Void> uploadResponse = theAvatarServiceClient.uploadAvatar(userId, file);
+
+        if (!uploadResponse.getStatusCode().is2xxSuccessful()) {
+            throw new RuntimeException("AvatarController-@PostMapping :: %s".formatted(uploadResponse.getStatusCode().toString()));
         }
 
-        return response;
+        response.sendRedirect("/user/" + userId);
     }
 
     @DeleteMapping("/delete_avatar/{userId}")

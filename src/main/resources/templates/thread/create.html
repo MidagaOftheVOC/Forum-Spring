@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type = "text/css" href="/css/header_fragment.css" />
+    <link rel="stylesheet" type = "text/css" href="/css/thread_create.css" />
+
+
+    <title>Създаване на нишка</title>
+
+
+</head>
+
+<header>
+
+    <div th:insert = "~{fragments/header_fragment :: header}"></div>
+
+</header>
+
+<body>
+
+<div class="page-content-wrapper">
+
+    <div class="side-column left-column"></div>
+
+    <div class="middle-column">
+
+    <form class = "thread-creation-form" th:method = "POST" th:action = "@{/thread/create}" th:object = "${threadCreationRequest}">
+
+        <div class="thread-creation-title">
+            <input name="thread-title" placeholder="Заглавието отива тук..." th:field = "*{title}">
+        </div>
+        <div class = "thread-creation-body">
+            <input name="content-body" placeholder="Тялото на нишката отива тук..." th:field = "*{body}">
+        </div>
+
+        <div class = "thread-creation-button">
+            <button type="submit">Създай нишка</button>
+        </div>
+
+        <p th:if="${thrCreationErrmsg != null}" th:text="${thrCreationErrmsg}"  style="color:red"></p>
+
+    </form>
+
+    </div>
+    <div class="side-column right-column"></div>
+</div>
+
+
+</body>
+</html>

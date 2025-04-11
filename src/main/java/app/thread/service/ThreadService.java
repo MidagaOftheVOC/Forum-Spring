@@ -1,28 +1,82 @@
 package app.thread.service;
 
 
+import app.thread.ThreadSendingPostsToLockedThread;
+import app.post.model.Post;
+import app.security.AuthenticationUserData;
 import app.thread.ForumThreadNotFoundException;
 import app.GCV;
 import app.thread.model.Thread;
 import app.thread.repository.ThreadRepository;
+import app.user.service.UserService;
+import app.web.dto.ThreadCreationObject;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 
-@Slf4j
+@Slf4j  @AllArgsConstructor
 @Service
 public class ThreadService {
 
     private final ThreadRepository theThreadRepository;
 
-    public ThreadService(
-            ThreadRepository _thread_repo
-    )
-    {
-        theThreadRepository = _thread_repo;
+    private final UserService theUserService;
+
+    public void incrementPostCount(int threadId){
+        Thread t = getThread(threadId);
+        t.setPosts(t.getPosts() + 1);
+        theThreadRepository.save(t);
+    }
+
+    public boolean canTakePosts(int threadId){
+        Thread t = getThread(threadId);
+
+        if(t.isLocked()){
+            throw new ThreadSendingPostsToLockedThread(
+                    "Attempting to post to locked thread with ID [%s]"
+                            .formatted(threadId)
+            );
+        }
+
+        return true;
+    }
+
+    public int createThread(AuthenticationUserData auth, ThreadCreationObject tco){
+
+        Thread self = new Thread();
+
+        self.setOriginalPoster(theUserService.getUserById(auth.getUserUuid()));
+        self.setThreadTitle(tco.getTitle());
+        self.setThreadBody(tco.getBody());
+        self.setCreationDate(LocalDateTime.now());
+
+        self.setLocked(false);
+        self.setPinned(false);
+        self.setViews(0);
+        self.setPosts(0);
+
+        theThreadRepository.save(self);
+
+        return self.getId();
+    }
+
+    /**
+     * Use this function when accessing it through thread/view.
+     * It performs *on view* actions, like increaisng the view count and
+     * returns the proper thread object.
+     * @param threadId
+     * @return
+     */
+    public Thread openThread(int threadId){
+        Thread thr = getThread(threadId);
+        thr.setViews(thr.getViews() + 1);
+        theThreadRepository.save(thr);
+        return thr;
     }
 
     public Thread getThread(int threadId){
