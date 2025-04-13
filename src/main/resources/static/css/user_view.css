@@ -48,3 +48,49 @@
 .user-profile-row .italic {
     font-style: italic;
 }
+
+.user-edit-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.edit-profile-btn,
+.admin-edit-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  margin: 5px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.edit-profile-btn {
+  background-color: skyblue;
+  color: white;
+}
+
+.edit-profile-btn:hover {
+  background-color: deepskyblue;
+}
+
+.admin-edit-btn {
+  background-color: crimson;
+  color: white;
+}
+
+.admin-edit-btn:hover {
+  background-color: darkred;
+}
+
+.redirect-message {
+  background-color: #c0392b; /* deep red */
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+}

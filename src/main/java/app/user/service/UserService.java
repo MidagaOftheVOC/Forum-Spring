@@ -2,9 +2,8 @@ package app.user.service;
 
 
 import app.GCV;
-import app.post.model.Post;
 import app.security.AuthenticationUserData;
-import app.user.ForumUserBannedUserAttemptsAction;
+import app.user.BannedUserAttemptsAction;
 import app.user.ForumUserNotFound;
 import app.user.RegisteringExistingUserException;
 import app.user.model.User;
@@ -45,6 +44,7 @@ public class UserService implements UserDetailsService {
         u.setTotalPosts(
                 u.getTotalPosts() + 1
         );
+        theUserRepository.save(u);
     }
 
     public boolean isAbleToPost(UUID userId){
@@ -52,7 +52,7 @@ public class UserService implements UserDetailsService {
         User u = getUserById(userId);
         if(u.getUserStatus().equals(UserStatus.BANNED)
         || u.getUserStatus().equals(UserStatus.INACTIVE)) {
-            throw new ForumUserBannedUserAttemptsAction(
+            throw new BannedUserAttemptsAction(
                     "User with ID [%s] is banned and attempted action"
                             .formatted(userId.toString())
             );

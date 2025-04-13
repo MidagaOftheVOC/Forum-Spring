@@ -11,7 +11,7 @@
     <div class = "thread">
 
         <div class = "thread-title">
-            <a style = "text-decoration:none;" th:href="@{/thread/view/{thrId} (thrId = ${thr.id})}"><span th:text = "${thr.threadTitle}"></span></a> <span style="color: grey;" th:if = "${thr.isLocked}">(заключена)</span>
+            <a style = "text-decoration:none;" th:href="@{/thread/{thrId} (thrId = ${thr.id})}"><span th:text = "${thr.threadTitle}"></span></a> <span style="color: grey;" th:if = "${thr.isLocked}">(заключена)</span>
         </div>
 
         <div class = "thread-body">
@@ -37,7 +37,7 @@
         <div class = "bottom-div">
             <!-- това вляво -->
             <div class = "user-creation-info">
-                От <a th:href = "@{/users/{opId} (opId = ${thr.originalPoster.id})}"><span th:text="${thr.originalPoster.shownUsername == null ? thr.originalPoster.username : thr.originalPoster.shownUsername}"></span></a>, създадена на <span th:text="${#temporals.format(thr.creationDate, 'dd MMM yyyy HH:mm')}"></span>
+                От <a th:href = "@{/user/{opId} (opId = ${thr.originalPoster.id})}"><span th:text="${thr.originalPoster.shownUsername == null ? thr.originalPoster.username : thr.originalPoster.shownUsername}"></span></a>, създадена на <span th:text="${#temporals.format(thr.creationDate, 'dd MMM yyyy HH:mm')}"></span>
             </div>
             <!-- това вдясно -->
             <div>

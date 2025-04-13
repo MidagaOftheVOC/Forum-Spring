@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>User Profile</title>
+  <title th:text = "'Профил на ' + ${user.user.username}"></title>
 
   <link rel="stylesheet" type = "text/css" href="/css/user_view.css" />
 
@@ -11,42 +11,57 @@
 <body>
 
 <div class="user-profile-fragment">
+
+  <div th:if="${redirectRequest_ErrorMessage != null}" class="redirect-message">
+    <p th:text="${redirectRequest_ErrorMessage}"></p>
+  </div>
+
   <div class="user-profile-box">
-    <div class="user-profile-avatar" th:if="${avatarUrl != null}">
-      <img th:src="@{${avatarUrl}}" alt="User Avatar">
+    <div class="user-profile-avatar" th:if="${user.avatarUrl != null}">
+      <img th:src="@{${user.avatarUrl}}" alt="User Avatar">
     </div>
 
     <div class="user-profile-info">
       <div class="user-profile-row">
         <span class="label">Потребителско име:</span>
-        <span class="value" th:text="${user.username}"></span>
+        <span class="is-banned" th:if="${user.user.isBanned()}" style="font-size: 1.3em; font-weight: bold; color: red;">(БАННАТ) </span>
+        <span class="is-banned" th:if="${user.user.isAdmin()}" style="font-size: 1.3em; font-weight: bold; color: purple;">(АДМИН) </span>
+        <span class="value" th:text="${user.user.username}"></span>
       </div>
-      <div th:if="${user.shownUsername != null}" class="user-profile-row">
-        <span class="label">Показано име:</span>
-        <span class="value" th:text="${user.shownUsername}"></span>
+      <div th:if="${user.user.shownUsername != null}" class="user-profile-row">
+        <span class="label">Излизащ като:</span>
+        <span class="value" th:text="${user.user.shownUsername}"></span>
       </div>
       <div class="user-profile-row">
         <span class="label">Е-мейл:</span>
-        <span class="value" th:text="${user.email}"></span>
-      </div>
-      <div class="user-profile-row">
-        <span class="label">Статус:</span>
-        <span class="value" th:text="${user.userStatus}"></span>
-      </div>
-      <div class="user-profile-row">
-        <span class="label">Вид профил:</span>
-        <span class="value" th:text="${user.userType}"></span>
+        <span class="value" th:text="${user.user.email}"></span>
       </div>
       <div class="user-profile-row">
         <span class="label">Общо качени постове:</span>
-        <span class="value" th:text="${user.totalPosts}"></span>
+        <span class="value" th:text="${user.user.totalPosts}"></span>
       </div>
-      <div th:if="${user.shownUsername != null}" class="user-profile-row">
+      <div th:if="${user.user.quote != null}" class="user-profile-row">
         <span class="label">Цитат:</span>
-        <span class="value italic" th:text="${user.quote}"></span>
+        <span class="value italic" th:text="${user.user.quote}"></span>
       </div>
     </div>
   </div>
+
+  <div class="user-edit-button" th:if="${loggedInUser != null}">
+    <a th:if="${loggedInUser.id == user.user.id}"
+       class="edit-profile-btn"
+       th:href="@{/user/edit/{targetUserId} (targetUserId = ${user.user.id})}">    <!-- продължаваме тук -->
+      Редактирай профила
+    </a>
+
+    <a th:if="${loggedInUser.id != user.user.id and  loggedInUser.isAdmin()}"
+       class="admin-edit-btn"
+       th:href="@{'/admin/edit/' + ${user.user.id}}">
+      Редактирай като АДМИНИНИСТРАТОР
+    </a>
+  </div>
+
+
 </div>
 
 </body>

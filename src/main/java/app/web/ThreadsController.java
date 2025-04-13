@@ -41,9 +41,7 @@ public class ThreadsController {
     final private CommonService theCommonService;
 
 
-
-
-    @GetMapping("/view/{threadId}")
+    @GetMapping("/{threadId}")
     public ModelAndView getThreadView(
             @AuthenticationPrincipal AuthenticationUserData auth,
             @PathVariable("threadId") int threadId

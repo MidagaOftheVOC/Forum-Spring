@@ -114,7 +114,7 @@ body {
     background-color: #004d99;
 }
 
-.account-information-logged-in-div img {
+.account-information-logged-in-div a img {
     width: 100px;
     height: 100px;
     margin-left: 20px;

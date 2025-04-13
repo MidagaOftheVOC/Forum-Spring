@@ -61,12 +61,12 @@ public class User {
     @Column(name = "date_last_activity")
     private LocalDateTime lastActiveDate;
 
-
     @OneToMany(mappedBy = "originalPoster", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Thread> threadList;
 
     @OneToMany(mappedBy = "originalPoster", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Post> postList;
+
 
     public String whichUsernameToShow(){
         return (shownUsername == null) ? username : shownUsername;
@@ -84,6 +84,18 @@ public class User {
                 return "Стандартен";
             }
         }
+    }
+
+    public boolean isAdmin(){
+        return UserType.ADMIN == userType;
+    }
+
+    public boolean isActive(){
+        return UserStatus.ACTIVE == userStatus;
+    }
+
+    public boolean isBanned(){
+        return UserStatus.BANNED == userStatus;
     }
 
     public String debugString(){

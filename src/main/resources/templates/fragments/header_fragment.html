@@ -38,7 +38,9 @@
                     </div>
                 </div>
                 <div class="account-information-logged-in-right">
-                    <img th:src="${loggedUserURL}" width="100px" height="100px">
+                    <a th:href="@{/user/{userId} (userId = ${user.id})}">
+                        <img th:src="${loggedUserURL}" width="100px" height="100px">
+                    </a>
                     <div class="account-information-logout-button-div">
                         <a th:href="@{/logout}">ИЗЛЕЗ</a>
                     </div>
