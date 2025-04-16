@@ -19,17 +19,15 @@
                             <button class = "rating-button" name = "action" value="unrate"> / </button>
                             <button class = "rating-button" name = "action" value="dislike"> - </button>
                         </form>
-                        <span th:text="${post.post.points}"
-                              th:style="${(post.post.points > 0) ? 'color: green;' :
-                              (post.post.points < 0) ? 'color: red;' : 'color: grey;'}">
-                        </span>
                     </div>
                     <div class ="post-header-row-right-div">
                         <div class = "post-date-div">
                             <span th:text="${#temporals.format(post.post.creationDate, 'dd MMM yyyy HH:mm')}"></span>
                         </div>
                         <div class = "post-stats-div">
-                            <span th:text="${post.post.points}"></span> # <span th:text="${post.post.id}"></span>
+                            <span th:text="${post.post.points}"></span> # <span th:style="${(post.post.points > 0) ? 'color: green;' :
+                            (post.post.points < 0) ? 'color: red;' : 'color: grey;'}"
+                                th:text="${post.post.id}"></span>
                         </div>
                     </div>
                 </div>

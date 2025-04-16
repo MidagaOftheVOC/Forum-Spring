@@ -37,7 +37,9 @@
         <div class = "bottom-div">
             <!-- това вляво -->
             <div class = "user-creation-info">
-                От <a th:href = "@{/user/{opId} (opId = ${thr.originalPoster.id})}"><span th:text="${thr.originalPoster.shownUsername == null ? thr.originalPoster.username : thr.originalPoster.shownUsername}"></span></a>, създадена на <span th:text="${#temporals.format(thr.creationDate, 'dd MMM yyyy HH:mm')}"></span>
+                От <a th:href = "@{/user/{opId} (opId = ${thr.originalPoster.id})}">
+                <span th:class="${thr.originalPoster.isBanned() ? 'banned' : (thr.originalPoster.isAdmin() ? 'admin' : 'normal')}"
+                        th:text="${thr.originalPoster.shownUsername == null ? thr.originalPoster.username : thr.originalPoster.shownUsername}"></span></a>, създадена на <span th:text="${#temporals.format(thr.creationDate, 'dd MMM yyyy HH:mm')}"></span>
             </div>
             <!-- това вдясно -->
             <div>

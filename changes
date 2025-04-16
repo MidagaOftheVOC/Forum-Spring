@@ -1,0 +1,14 @@
+16.04.2025
+
+User Edit changes.
+
+Need to be finished: UserService::processEditRequest(). Also make sure the DTO as well as the HTML handle not changing a field. Preferably by making the current values the default ones inside. Not with ${placeholder} attribute, but maybe already with ${value} attribute.
+
+
+AvatarController::POST mapping
+
+Note: The POST mapping should handle cases of changing avatars, not only uploading them. But Java is being a bitch and refuses to work with HTTP codes without crashing. So the controller has to be carefully setup around the try/catch blocks, with more than one POST requests inside it.
+The idea is to probe with one POST, check if it conflits(or returns 409), if it does, then we delete that user's avatar and POST it another avatar
+It is a hack, but oh well. We live and we learn.
+
+

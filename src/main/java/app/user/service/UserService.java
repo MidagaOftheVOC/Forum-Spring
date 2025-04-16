@@ -12,6 +12,7 @@ import app.user.model.UserType;
 import app.user.repository.UserRepository;
 import app.web.dto.RegistrationRequest;
 
+import app.web.dto.UserEditingRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,6 +39,27 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository theUserRepository;
     private final PasswordEncoder thePasswordEncoder;
+
+    public void processEditRequest(
+            UserEditingRequest req,
+            UUID userId
+    ) {
+        User u = getUserById(userId);
+
+        if(!u.getEmail().equals(req.getEmail())){
+            u.setEmail(req.getEmail());
+        }
+
+        if(!u.getShownUsername().equals(req.getShownUsername())){
+            u.setShownUsername(req.getShownUsername());
+        }
+
+        if(!u.getQuote().equals(req.getQuote())){
+            u.setQuote(req.getQuote());
+        }
+
+        theUserRepository.save(u);
+    }
 
     public void registerPost(UUID userId){
         User u = getUserById(userId);
