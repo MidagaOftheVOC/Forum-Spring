@@ -28,6 +28,17 @@
 
 <body>
 
+<script th:inline = "javascript">
+    /*<![CDATA[*/
+    window.onload = function() {
+        const scrollFlag = /*[[${scrollToBottom}]]*/ false;
+        if(scrollFlag){
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    };
+    /*]]>*/
+</script>
+
 <div class="page-content-wrapper">
 
     <div class="side-column left-column"></div>
@@ -46,8 +57,9 @@
 
             <div class = "after-post-list-div">
                 <div th:if="${user != null}" class = "post-creation-div">
-                    <form class = "post-creation-form" th:method = "POST" th:action="@{/post/create?threadId={thrId} (thrId = ${thread.id})}" th:object = "${postCreationRequest}">
-                        <input name="content" placeholder="Напиши отговор..." th:field = "*{content}"> <!-- GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG HHHHHHHHHHHHHHHHHHHHHHHHHHHHH-->
+                    <form class = "post-creation-form" th:method = "POST"
+                          th:action="@{/post/create?threadId={thrId} (thrId = ${thread.id})}" th:object = "${postCreationRequest}">
+                        <input name="content" placeholder="Напиши отговор..." th:field = "*{content}">
                         <br>
                         <button type="submit">Прати</button>
                     </form>

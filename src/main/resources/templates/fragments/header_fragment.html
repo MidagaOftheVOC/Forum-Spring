@@ -26,9 +26,11 @@
             <div class="account-information-logged-in-div" th:if="${user != null}">
                 <div class="account-information-logged-in-left">
                     <div class="account-information-user-div">
-                        Влязъл като:<br>
-                        <a th:href = "@{/user/{userId} (userId = ${user.id})}" style="text-decoration:none; color: skyblue;"
-                        ><span th:text="${user.username}"></span></a>   <br>
+                        Влязъл като:<br>    <!-- diff colours based on use type, really need a common .css file-->
+                        <a th:href="@{/user/{userId} (userId = ${user.id})}"
+                           th:class="${user.isBanned() ? 'banned' : (user.isAdmin() ? 'admin' : 'normal')}">
+                            <span th:text="${user.username}"></span></a>
+                        <br>
                         Вид потребител:<br>
                         <span th:text="${user.bulgarianType()}"></span>
                     </div>

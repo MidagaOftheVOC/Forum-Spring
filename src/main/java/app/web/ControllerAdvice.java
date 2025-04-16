@@ -41,6 +41,4 @@ public class ControllerAdvice {
                 .addObject("redirectRequest_ErrorMessage", "Непозволен достъп: " + ex.getMessage());
     }
 
-
-
 }

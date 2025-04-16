@@ -1,0 +1,15 @@
+
+.admin {
+    text-decoration: none;
+    color: purple;
+}
+
+.banned {
+    text-decoration: none;
+    color: red;
+}
+
+.normal {
+    text-decoration: none;
+    color: skyblue;
+}

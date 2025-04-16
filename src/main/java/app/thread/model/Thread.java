@@ -27,7 +27,7 @@ public class Thread {
     @JoinColumn(name = "original_poster_uuid", referencedColumnName = "user_uuid")
     private User originalPoster;
 
-    @OneToMany(mappedBy = "threadWherePosted", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "threadWherePosted", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Post> postList;
 
     @Column(name = "content_title", nullable = false)

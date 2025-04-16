@@ -12,13 +12,17 @@
         <div class = "post-main-part">
             <div class = "post-left-half">
                 <div class = "post-header-row">
-                    <div class = "post-header-votes">
-                        <form th:action = "@{/rate_post}" th:method = "POST">
+                    <div class = "post-header-votes" >
+                        <form th:if="${user != null}" th:action = "@{/rate_post}" th:method = "POST">
                             <input type="hidden" name="postId" th:value="${post.post.id}" />   <!--  this is the peak of software engineering  -->
                             <button class = "rating-button" name = "action" value="like"> + </button>
                             <button class = "rating-button" name = "action" value="unrate"> / </button>
                             <button class = "rating-button" name = "action" value="dislike"> - </button>
                         </form>
+                        <span th:text="${post.post.points}"
+                              th:style="${(post.post.points > 0) ? 'color: green;' :
+                              (post.post.points < 0) ? 'color: red;' : 'color: grey;'}">
+                        </span>
                     </div>
                     <div class ="post-header-row-right-div">
                         <div class = "post-date-div">
@@ -37,7 +41,12 @@
 
             <div class = "post-right-half">
                 <div class = "post-op-username">
-                    <span class="post-user-name" th:text="${post.post.originalPoster.whichUsernameToShow()}"></span>
+                    <a th:href="@{/user/{id}(id=${post.post.originalPoster.id})}">
+                       <span class="post-user-name"
+                             th:text="${post.post.originalPoster.whichUsernameToShow()}"
+                             th:class="${post.post.originalPoster.isBanned() ? 'banned' : (post.post.originalPoster.isAdmin() ? 'admin' : 'normal')}">
+                       </span>
+                    </a>
                 </div>
                 <div class = "post-op-avatar">
                     <img th:src="${post.avatarUrl}" width="250" height="250">

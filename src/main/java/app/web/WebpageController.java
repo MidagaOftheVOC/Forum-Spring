@@ -70,7 +70,7 @@ public class WebpageController {
         mav.addObject("loginRequest", new LoginRequest());
 
         if(errorParameter != null){
-            mav.addObject("errorMsg", "This means you fucked the login.");
+            mav.addObject("errorMsg", "Неправилни входни данни");
         }
 
         return mav;

@@ -36,7 +36,7 @@ public class CommonService {
 
     public void ensureAuthUserMatchesId(AuthenticationUserData auth, UUID targetUserId, String message){
         verifyAuthPrinciple(auth, true);    //  ensuring matching user IDs requires by default a logged in user, i.e. that's exception-worthy
-        if(auth.getUserUuid().equals(targetUserId)) throw new UserNotAuthorised(message);
+        if(!auth.getUserUuid().equals(targetUserId)) throw new UserNotAuthorised(message);
     }
 
     public ModelAndView getCommonHeaderMAV(AuthenticationUserData auth){

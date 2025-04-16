@@ -242,3 +242,19 @@ body {
     color: white;          /* Inherit color from parent, or set your own */
     text-decoration: none;   /* Remove underline if desired */
 }
+
+
+.admin {
+    text-decoration: none;
+    color: purple;
+}
+
+.banned {
+    text-decoration: none;
+    color: red;
+}
+
+.normal {
+    text-decoration: none;
+    color: skyblue;
+}

@@ -44,9 +44,18 @@ public class ThreadsController {
     @GetMapping("/{threadId}")
     public ModelAndView getThreadView(
             @AuthenticationPrincipal AuthenticationUserData auth,
-            @PathVariable("threadId") int threadId
+            @PathVariable("threadId") int threadId,
+            Model model
             ){
         ModelAndView mav = theCommonService.getCommonHeaderMAV(auth);
+
+        if(model.containsAttribute("errMsg_postCreation")){
+            mav.addObject("errMsg_postCreation", model.getAttribute("errMsg_postCreation"));
+        }
+
+        if(model.containsAttribute("scrollDown")){
+            mav.addObject("scrollToBottom", model.getAttribute("scrollDown"));
+        }
 
         if(auth != null){
             mav.addObject("postCreationRequest", new PostCreationRequest());
@@ -63,6 +72,7 @@ public class ThreadsController {
             );
             finalisedPostListForRendering.add(post);
         }
+
 
         mav.addObject("thread", thread);
         mav.addObject("posts", finalisedPostListForRendering);
@@ -89,15 +99,13 @@ public class ThreadsController {
         // Get control already ensures a user is logged in to use this.
 
         if(result.hasErrors()){
-            ModelAndView errMav = theCommonService.getCommonHeaderMAV(auth);
 
-            if(result.hasFieldErrors("title")){
-                errMav.addObject("thrCreationErrmsg", "Заглавието е неподходящо");
-                return errMav;
-            }
-            else {
-                errMav.addObject("thrCreationErrmsg", "Тялото на нишката е празно или по-дълго от 1024 символа.");
-                return errMav;
+            if( threadCreationRequest.getTitle().isEmpty()){
+                ModelAndView mav = theCommonService.getCommonHeaderMAV(auth);
+                mav.addObject("threadCreationRequest", threadCreationRequest);
+                mav.addObject("thrCreationErrmsg", "Нишките трябва да имат заглавие.");
+                mav.setViewName("thread/create");
+                return mav;
             }
         }
 
