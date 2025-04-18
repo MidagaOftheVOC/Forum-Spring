@@ -12,10 +12,11 @@
 <hr>
 
 <h2>Upload New Avatar</h2>
-<form id = "uploadForm" method = "POST" th:action="@{/upload_avatar/{userId}(userId=${user.id})}" enctype="multipart/form-data" >
-    <input type="file" name="file" id="fileInput" accept=".png, .jpg, .jpeg, .gif" />   <!--  File select and upload to JS function  -->
-    <button type="submit">Upload Avatar</button>
-</form>
+
+    <form id = "uploadForm" method = "POST" th:action="@{/upload_avatar/{userId}(userId=${user.id})}" enctype="multipart/form-data" >
+        <input type="file" name="file" id="fileInput" accept=".png, .jpg, .jpeg, .gif" />
+        <button type="submit">Качи нов аватар</button>
+    </form>
 
 <p id="uploadStatus"></p>
 </body>

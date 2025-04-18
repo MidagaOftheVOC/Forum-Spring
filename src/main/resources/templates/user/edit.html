@@ -2,15 +2,48 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User Profile</title>
+    <title th:text = "'Редакция профила на ' + ${user.username}"></title>
 
-    <link rel="stylesheet" type = "text/css" href="/css/user_view.css" />
+    <link rel="stylesheet" type = "text/css" href="/css/user_edit.css" />
 
+    <script src="/js/user_edit.js" defer></script>
 
 </head>
 <body>
+<div class = "useredit-current-avatar">
+    <img th:src="${avatarUrl}">
+</div>
+<div class = "useredit-upper-avatar-div" data-user-id="${user.id}">
 
+    <form id = "uploadForm" method = "POST" th:action="@{/upload_avatar/{userId}(userId=${user.id})}" enctype="multipart/form-data" >
+        <input type="file" name="file" id="fileInput" accept=".png, .jpg, .jpeg, .gif" />
+        <button type="submit">Промени аватара си</button>
+    </form>
 
+</div>
+
+<div class = "useredit-lower-div">
+    <form th:action="@{/user/edit/{userId}(userId = ${user.id})}" th:method="POST" th:object="${userEditingRequest}">
+        <div>
+            Ново показано име:
+        </div>
+        <input class = "edit-shownUsername" type="text"
+               th:placeholder="${(user.shownUsername != null) ? user.shownUsername : 'Показано име'}" th:field="*{shownUsername}">
+        <div th:if="${#fields.hasErrors('shownUsername')}" th:errors="*{shownUsername}" class="field-error"></div>
+        <div>
+            Е-поща:
+        </div>
+        <input class = "edit-email" type="text"  th:placeholder="${user.email}" th:field="*{email}">
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="field-error"></div>
+        <div>
+            Цитат:
+        </div>
+        <input class = "edit-quote" type="text"
+               th:placeholder="${(user.quote != null) ? user.quote : 'Н/Т'}" th:field="*{quote}">
+        <div th:if="${#fields.hasErrors('quote')}" th:errors="*{quote}" class="field-error"></div>
+        <button class = "register-button" type="submit">Промени</button>
+    </form>
+</div>
 
 </body>
 </html>

@@ -8,11 +8,11 @@ import lombok.Data;
 public class RegistrationRequest {
 
     @NotNull(message = "Username mandatory")
-    @Size(min = 8, max = 30, message = "Username between 8 and 30 chars")
+    @Size(min = 8, max = 30, message = "Потребителските имена трябва да са между 8 и 30 символа")
     private String username;
 
     @NotNull(message = "Password mandatory")
-    @Size(min = 8, max = 30, message = "Password between 8 and 30 chars")
+    @Size(min = 8, max = 30, message = "Паролите трябва да са между 8 и 30 символа")
     private String rawPassword;
 
     /**
@@ -21,11 +21,11 @@ public class RegistrationRequest {
      * empty strings MUST be turned to null before drawing up
      * an entry in DB.
      */
-    @Size(min = 0, max = 30, message = "Shown username up to 30 characters")
+    @Size(min = 0, max = 30, message = "Показаното име може да е дълго до 30 символа")
     private String shownUsername;
 
-    @NotNull(message = "E-mail mandatory")
-    @Size(max = 320, message = "Bad e-mail entered")    //  Max length according to RFC standard
+    @NotNull(message = "Е-пощата е задължителна.")
+    @Size(max = 320, message = "Неправилна е-поща.")    //  Max length according to RFC standard
     private String email;
 
     public boolean hasAltUsername(){

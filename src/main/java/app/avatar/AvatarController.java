@@ -1,10 +1,13 @@
 package app.avatar;
 
 import app.GCV;
+import feign.FeignException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -45,14 +48,31 @@ public class AvatarController {
                              HttpServletResponse response) throws IOException {
         if (GCV.isDebugging()) System.out.println("Entered avatar-svc POST mapping in monolith");
 
-        ResponseEntity<Void> uploadResponse = theAvatarServiceClient.uploadAvatar(userId, file);
+        // Unfortunately, java can't handle a non 2xx response without crashing
+        // so we will do this ugliness instead
+        ResponseEntity<Void> uploadResponse;
+        try {
+            uploadResponse = theAvatarServiceClient.uploadAvatar(userId, file);
 
-        if (!uploadResponse.getStatusCode().is2xxSuccessful()) {
-            throw new RuntimeException("AvatarController-@PostMapping :: %s".formatted(uploadResponse.getStatusCode().toString()));
+        } catch(HttpClientErrorException | HttpServerErrorException ex){
+
+            if(ex.getStatusCode().equals(HttpStatus.CONFLICT)){ // this is for changing the avatar
+                ResponseEntity<Void> changeResponse = theAvatarServiceClient.deleteAvatar(userId);
+
+                if( changeResponse.equals(HttpStatus.NO_CONTENT)){   // sucessful DELETE
+                    changeResponse = theAvatarServiceClient.uploadAvatar(userId, file);
+
+                    if(changeResponse.getStatusCode().is2xxSuccessful()){
+                        response.sendRedirect("/user/edit/" + userId);
+                    }
+                }
+            }   /*   end change avatar block   */
+            throw new RuntimeException("AvatarController-@PostMapping :: %s".formatted(ex.getStatusCode().toString()));
         }
-
-        response.sendRedirect("/user/" + userId);
+        response.sendRedirect("/user/edit/" + userId);
     }
+
+
 
     @DeleteMapping("/delete_avatar/{userId}")
     public ResponseEntity<Void> deleteAvatar(@PathVariable UUID userId) {
