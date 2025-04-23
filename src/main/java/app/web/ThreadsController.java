@@ -110,7 +110,7 @@ public class ThreadsController {
         }
 
         int newThreadId = theThreadService.createThread(auth, threadCreationRequest);
-        return new ModelAndView("redirect:/thread/view/" + newThreadId);
+        return new ModelAndView("redirect:/thread/" + newThreadId);
     }
 
 

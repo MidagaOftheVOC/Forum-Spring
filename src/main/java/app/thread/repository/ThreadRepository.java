@@ -1,5 +1,6 @@
 package app.thread.repository;
 
+import app.category.model.Category;
 import app.thread.model.Thread;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -28,4 +29,7 @@ public interface ThreadRepository extends JpaRepository<Thread, Integer> {
     List<Thread> findTop10ByOrderByViewsDesc();
 
     List<Thread> findTop10ByOrderByPostsDesc();
+
+
+    List<Thread> findByCategories(Category category);
 }

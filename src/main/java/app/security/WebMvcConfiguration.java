@@ -24,6 +24,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                         .requestMatchers("/main", "/login", "/register").permitAll()
                         .requestMatchers("/thread/**").permitAll()
                         .requestMatchers("/user/**").permitAll()
+                        .requestMatchers("/category/browse", "/category/search/**").permitAll()
 
                         .anyRequest().authenticated()
                 )

@@ -1,6 +1,7 @@
 package app.thread.service;
 
 
+import app.category.model.Category;
 import app.thread.ThreadSendingPostsToLockedThread;
 import app.post.model.Post;
 import app.security.AuthenticationUserData;
@@ -15,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +28,32 @@ public class ThreadService {
     private final ThreadRepository theThreadRepository;
 
     private final UserService theUserService;
+
+    // TODO: fix this
+    public List<Thread> getAllThreadsByCategoryId(int id){
+        return null;
+    }
+
+    public boolean attachCategory(
+            Thread t,
+            Category category
+    ) {
+
+        List<Category> list = t.getCategories();
+
+        if(list == null) list = new ArrayList<Category>();
+
+        if(list.size() >= 5) return false;
+
+        // FIXME: possibly throw an exception here
+        if(list.contains(category)) return false;
+
+        list.add(category);
+
+        t.setCategories(list);
+        theThreadRepository.save(t);
+        return true;
+    }
 
     public void incrementPostCount(int threadId){
         Thread t = getThread(threadId);
