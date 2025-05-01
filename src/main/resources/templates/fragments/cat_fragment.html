@@ -8,14 +8,15 @@
 
 <div th:fragment="category(cat)" class="cat-fragment-div">
 
-    <!-- this is a rectangle, with some padding/margins, black 1px outline and color as follows-->
-    <div class = "main-cat-div" th:style = "${ color: {col} ( col = ${cat.categoryColour})}">
-        <a th:href="@{cat/{id} (id = ${cat.id})}">
-            <span th:text = "${cat.categoryName}"></span>
+    <div class="main-cat-div"
+         th:style="'background-color: #' + ${cat.categoryColour} + ';'">
+        <a th:href="@{/cat/{id}(id=${cat.id})}" class="cat-link">
+            <span th:text="${cat.categoryName}"></span>
         </a>
     </div>
 
 </div>
+
 
 </body>
 </html>

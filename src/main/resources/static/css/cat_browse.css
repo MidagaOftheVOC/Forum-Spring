@@ -1,0 +1,29 @@
+.content-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0;
+    gap: 0;
+    min-height: calc(100vh - 150px);
+    box-sizing: border-box;
+}
+
+.side-column {
+    flex: 0 0 20%;
+    background-color: #eaeaea;
+    min-height: 500px;
+    box-sizing: border-box;
+    border-radius: 0;
+}
+
+.middle-column {
+    flex: 0 0 60%;
+    background-color: #ffffff;
+    min-height: 500px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0;
+    box-shadow: none; /* Also removing the shadow for a totally clean look */
+}

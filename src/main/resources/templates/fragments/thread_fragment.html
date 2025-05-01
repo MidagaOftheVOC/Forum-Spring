@@ -19,18 +19,11 @@
         </div>
 
         <!-- this won't be a fragment, just copy and paste this thing -->
-        <div class = "category-div" th:if = "${thr.categories != null}">
+        <div class = "category-div" th:if = "${thr.categories != null && !thr.categories.isEmpty()}">
             <!-- repeating category fragment that doesn't exist yet goes here -->
-            <div th:each = "category : ${thr.categories}">
+            <div th:each = "cat : ${thr.categories}">
                 <!--   REMEMBER #### FOR THE COLORS HERE     -->
-                <div th:style="background-color: #${category.categoryColour}"  class = "category-item">
-                    <a
-                        th:href="@{/category/{categoryName} (categoryName=${category.categoryName})}"
-                        style="color: white; text-decoration: none;"
-                    >
-                        <span th:text = "${category.categoryName}"></span>
-                    </a>
-                </div>
+                <div th:replace="~{fragments/cat_fragment :: category(${cat})}"></div>
             </div>
         </div>
 

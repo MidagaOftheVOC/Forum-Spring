@@ -1,66 +1,67 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org">
+    <head>
 
-    <meta charset="UTF-8">
-    <title>THE ФОРУМЪТ</title>
+        <meta charset="UTF-8">
+        <title>THE ФОРУМЪТ</title>
 
-    <link rel="stylesheet" type = "text/css" href="/css/main.css" />
-    <link rel="stylesheet" type = "text/css" href="/css/header_fragment.css" />
-    <link rel="stylesheet" type = "text/css" href="/css/thread_fragment.css" />
+        <link rel="stylesheet" type = "text/css" href="/css/main.css" />
+        <link rel="stylesheet" type = "text/css" href="/css/header_fragment.css" />
+        <link rel="stylesheet" type = "text/css" href="/css/thread_fragment.css" />
+        <link rel="stylesheet" type = "text/css" href="/css/cat_fragment.css" />
 
-</head>
+    </head>
 
-<header>
+    <header>
 
-    <div th:insert = "~{fragments/header_fragment :: header}"></div>
+        <div th:insert = "~{fragments/header_fragment :: header}"></div>
 
-</header>
+    </header>
 
-<body>
-<!--	двата двиа горе и долу се намират един до друг на истинската страниця	-->
-<!-- overflow-y: auto; <- това е необходимо, за да излезе слайдер, когато нишките излязът от екрана(y+)-->
+    <body>
+    <!--	двата двиа горе и долу се намират един до друг на истинската страниця	-->
+    <!-- overflow-y: auto; <- това е необходимо, за да излезе слайдер, когато нишките излязът от екрана(y+)-->
 
 
-<div class="page-content-wrapper">
+    <div class="page-content-wrapper">
 
-    <div class="side-column left-column"></div>
+        <div class="side-column left-column"></div>
 
-    <div class="middle-column">
+        <div class="middle-column">
 
-        <!-- Sorting bar -->
-        <div class="sorting-bar">
-            <div class="threads-label">Нишки, сортирани по:</div>
-            <div class="sorting-buttons">
-                <a th:href="@{/main(sort='views')}"
-                   th:class="${sortMethod} == 'views' ? 'sort-button selected-sort-button' : 'sort-button'">
-                    Гледания
-                </a>
-                <a th:href="@{/main(sort='posts')}"
-                   th:class="${sortMethod} == 'posts' ? 'sort-button selected-sort-button' : 'sort-button'">
-                    Постове
-                </a>
-                <a th:href="@{/main(sort='recent')}"
-                   th:class="${sortMethod} == 'recent' ? 'sort-button selected-sort-button' : 'sort-button'">
-                    Скорошни
-                </a>
+            <!-- Sorting bar -->
+            <div class="sorting-bar">
+                <div class="threads-label">Нишки, сортирани по:</div>
+                <div class="sorting-buttons">
+                    <a th:href="@{/main(sort='views')}"
+                       th:class="${sortMethod} == 'views' ? 'sort-button selected-sort-button' : 'sort-button'">
+                        Гледания
+                    </a>
+                    <a th:href="@{/main(sort='posts')}"
+                       th:class="${sortMethod} == 'posts' ? 'sort-button selected-sort-button' : 'sort-button'">
+                        Постове
+                    </a>
+                    <a th:href="@{/main(sort='recent')}"
+                       th:class="${sortMethod} == 'recent' ? 'sort-button selected-sort-button' : 'sort-button'">
+                        Скорошни
+                    </a>
+                </div>
             </div>
+
+            <div class="threads-container">
+                <div th:each="thr : ${threads}">
+
+                    <div th:replace="~{fragments/thread_fragment.html :: thread_frag(${thr})}"></div>
+
+                </div>
+            </div>
+
         </div>
 
-        <div class="threads-container">
-            <div th:each="thr : ${threads}">
-
-                <div th:replace="~{fragments/thread_fragment.html :: thread_frag(${thr})}"></div>
-
-            </div>
-        </div>
-
+        <div class="side-column right-column"></div>
     </div>
 
-    <div class="side-column right-column"></div>
-</div>
-
-</body>
+    </body>
 
 
-</html>
+    </html>

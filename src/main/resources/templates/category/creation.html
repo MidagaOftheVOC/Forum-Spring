@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type = "text/css" href="/css/header_fragment.css" />
 </head>
 
 <!--
@@ -10,6 +11,42 @@
     JS front-end category creation is a bit too much. But also a future goal.
 -->
 <body>
+
+<header>
+    <div th:insert="~{fragments/header_fragment :: header}"></div>
+</header>
+
+
+<main class="content-grid">
+    <div class="side-column left-column"></div>
+    <div class="middle-column">
+
+        <form class = "cat-creation-form" th:method = "POST" th:action = "@{/category/create}"
+        th:object="${categoryCreationRequest}">
+
+            <div class = "cat-creation-name">
+                <div class = "cat-creation-name-label">Име на категорията</div>
+                <input th:field="*{name}">
+                <span  th:errors = "*{name}"></span>
+            </div>
+
+            <div class = "cat-creation-colour">
+                <div class = "cat-creation-name-label">Цвят на категорията(може да не се въвежда)</div>
+                #<input  th:field="*{colour}">
+                <span  th:errors = "*{colour}"></span>
+            </div>
+
+            <button type="submit">Създай</button>
+
+        </form>
+
+    </div>
+    <div class="side-column right-column"></div>
+</main>
+
+
+
+
 
 </body>
 </html>

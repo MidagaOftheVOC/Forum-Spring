@@ -1,0 +1,37 @@
+/* Container for the category blocks */
+.category-block-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px; /* Space between the category blocks */
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px; /* Space from the edges of the middle column */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+/* Each category block (the category bricks) */
+.main-cat-div {
+    display: inline-block;
+    padding: 3px 5px; /* Size of the category block */
+    border: 1px solid black; /* 1px black border */
+    background-color: transparent; /* Background set by Thymeleaf */
+    box-sizing: border-box;
+    margin: 10px; /* Margin around each category block */
+}
+
+.cat-link {
+     font-family: 'Times New Roman', serif;
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Use default text color */
+    font-weight: bold;
+    color: black;
+
+}
+
+.main-cat-div a span {
+    display: block;
+    text-align: center; /* Center text inside the block */
+}

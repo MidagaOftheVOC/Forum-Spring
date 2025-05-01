@@ -13,7 +13,6 @@ public class CategoryCreationRequest {
     @Size(min = 1, max = 20)
     private String name;
 
-    @Size(min = 6, max = 6)
     private String colour;
 
 }

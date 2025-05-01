@@ -1,15 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Разглеждане на категории</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/header_fragment.css" />
+    <link rel="stylesheet" type="text/css" href="/css/cat_browse.css" />
+    <link rel="stylesheet" type="text/css" href="/css/cat_fragment.css" />
 </head>
-<!--
 
-    This page is supposed to list all available categories adequately.
-
--->
 <body>
+
+<header>
+    <div th:insert="~{fragments/header_fragment :: header}"></div>
+</header>
+
+<main class="content-grid">
+    <div class="side-column left-column"></div>
+
+    <div class="middle-column">
+        <div class="category-block-list">
+
+            <div th:each="cat : ${categoriesList}">
+
+                <div th:replace="~{fragments/cat_fragment :: category(${cat})}"></div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="side-column right-column"></div>
+</main>
 
 </body>
 </html>
